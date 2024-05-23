@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Inter';
+    src: url('./fonts/Inter.ttf');
+  }
+  @font-face {
+    font-family: 'Playfair';
+    src: url('./fonts/Playfair.ttf');
+  }
+  @font-face {
+    font-family: 'ClickerScript';
+    src: url('./fonts/ClickerScript.ttf');
+  }
+}
