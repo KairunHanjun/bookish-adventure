@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String updateUser(User user) {
         try{
-            userRepo.deleteById(user.getUsername());
+            userRepo.deleteById(user.getId());
             register(user);
         }catch(Exception e){
             return e.getMessage();
