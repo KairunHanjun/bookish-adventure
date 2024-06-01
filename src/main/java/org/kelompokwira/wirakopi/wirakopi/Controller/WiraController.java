@@ -8,11 +8,7 @@ import org.kelompokwira.wirakopi.wirakopi.Repository.AuthRepo;
 import org.kelompokwira.wirakopi.wirakopi.Repository.WiraRepo;
 import org.kelompokwira.wirakopi.wirakopi.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import jakarta.validation.Valid;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -63,7 +56,6 @@ public class WiraController {
     @Autowired
     private AuthRepo authRepo;
 
-    @Autowired
     public WiraController(UserService Services){
         this.service = Services;
     }
