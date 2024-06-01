@@ -38,5 +38,5 @@ Apache
    [PlDb]: <https://download.oracle.com/java/21/archive/jdk-21.0.2_windows-x64_bin.exe>
    [PlGh]: <https://code.visualstudio.com/download>
    [PlGd]: <https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe>
-   [PlOd]: <vscode:extension/vscjava.vscode-java-pack>
-   [PlMe]: <vscode:extension/vmware.vscode-boot-dev-pack>
+   [PlOd]: <https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack>
+   [PlMe]: <https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack>
