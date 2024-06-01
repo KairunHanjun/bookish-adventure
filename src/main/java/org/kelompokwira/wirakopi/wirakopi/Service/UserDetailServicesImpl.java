@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+// AUTO GENERATED DO NOT EDIT (EDIT AT YOUR OWN RISK)
+
 @Service
 @Transactional(readOnly = true)
 public class UserDetailServicesImpl implements UserDetailsService{
