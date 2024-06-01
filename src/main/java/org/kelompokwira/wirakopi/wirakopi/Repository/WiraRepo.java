@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Repository
-public interface WiraRepo extends JpaRepository<User, String> {
+public interface WiraRepo extends JpaRepository<User, Long> {
     List<User> findByUsername(String username);
     List<User> findByEmail(String email);
 } 
