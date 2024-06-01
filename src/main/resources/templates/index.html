@@ -1,11 +1,17 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Wira Ganteng Sedunia</title>
         <meta name="description" content="Our first page">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/output.css">
-        <script src="./main.js"></script> 
+        <script> var scrollEventHandler = function()
+          {
+            window.scroll(0, window.scrollY)
+          }
+          
+          window.addEventListener("scroll", scrollEventHandler, false)
+        </script> 
     </head>
     <body>
       <div id="main" class="flex flex-col w-screen h-full justify-between relative bg-white">
@@ -16,13 +22,13 @@
               <div class="flex space-x-5 ">
                 <a href="#" class="text-white text-sm hover:underline font-medium font-Playfair">Home</a>
                 <a href="#" class="text-white text-sm hover:underline font-medium font-Playfair">Menu</a>
-                <a href="./about.html" class="text-white text-sm hover:underline font-medium font-Playfair">About Us</a>
+                <a href="/static/about.html" class="text-white text-sm hover:underline font-medium font-Playfair">About Us</a>
               </div>
             </div>
           </div>
           <div class="flex justify-end absolute space-x-2 top-6 right-5">
-            <button class="w-[100px] h-12 left-0 top-0 bg-transparent rounded-lg shadow text-white text-sm font-medium font-Playfair hover:underline">SignIn</button>
-            <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">SignUp</button>
+            <a href="/auth/login"> <button class="w-[100px] h-12 left-0 top-0 bg-transparent rounded-lg shadow text-white text-sm font-medium font-Playfair hover:underline">SignIn</button> </a>
+            <a href="/auth/register"> <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">SignUp</button> </a>
           </div>
           <img class="w-screen flex flex-col left-0 top-0" src="./img/coffee_image.png" />
           <div id="Header-Content" class="w-[516px] h-[490px] left-[93px] top-[183px] absolute">

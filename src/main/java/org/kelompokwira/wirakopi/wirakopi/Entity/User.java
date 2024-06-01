@@ -1,0 +1,60 @@
+package org.kelompokwira.wirakopi.wirakopi.Entity;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
+public class User implements UserDetails{
+    @NotEmpty(message = "Username cannot be empty")
+    private String username;
+    @NotEmpty(message = "Password cannot be empty")
+    private String password;
+    @NotEmpty(message = "Email cannot be empty")
+    private String email;
+    private boolean enabled = false;
+    private Long OTP = (long) 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false)
+    private List<UserAuthorities> listAuthorities = new ArrayList<>();
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.listAuthorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+}
