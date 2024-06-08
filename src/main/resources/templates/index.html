@@ -1,10 +1,10 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Wira Ganteng Sedunia</title>
         <meta name="description" content="Our first page">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/output.css">
+        <link rel="stylesheet" href="/css/output.css">
         <script> var scrollEventHandler = function()
           {
             window.scroll(0, window.scrollY)
@@ -27,10 +27,15 @@
             </div>
           </div>
           <div class="flex justify-end absolute space-x-2 top-6 right-5">
-            <a href="/auth/login"> <button class="w-[100px] h-12 left-0 top-0 bg-transparent rounded-lg shadow text-white text-sm font-medium font-Playfair hover:underline">SignIn</button> </a>
-            <a href="/auth/register"> <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">SignUp</button> </a>
+            <div sec:authorize="!isAuthenticated()">
+              <a href="/auth/login"> <button class="w-[100px] h-12 left-0 top-0 bg-transparent rounded-lg shadow text-white text-sm font-medium font-Playfair hover:underline">SignIn</button> </a>
+              <a href="/auth/register"> <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">SignUp</button> </a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+              <a href="/logout"> <button class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Logout</button> </a>
+            </div>
           </div>
-          <img class="w-screen flex flex-col left-0 top-0" src="./img/coffee_image.png" />
+          <img class="w-screen flex flex-col left-0 top-0" src="/img/coffee_image.png" />
           <div id="Header-Content" class="w-[516px] h-[490px] left-[93px] top-[183px] absolute">
             <div class="w-[516px] h-[422px] left-0 top-0 absolute">
               <div class="left-0 top-0 absolute text-white text-[22px] font-medium font-Playfair">Make your day will be wonderful</div>
@@ -46,14 +51,14 @@
 
         <div id="Second-Slide" class="w-screen flex flex-col relative">
           <div class="flex flex-row-reverse w-screen justify-center">
-            <img class="w-[500px] h-[476px] left-0 top-14 relative" src="./img/ochin.png" /> 
+            <img class="w-[500px] h-[476px] left-0 top-14 relative" src="/img/ochin.png" /> 
             <div class="w-[800px] relative justify-center left-24 top-0 flex flex-col">
               <h2 class="left-0 top-0 relative text-yellow-900 text-[54px] font-bold font-Playfair whitespace-nowrap ">The Difference of our Coffee</h2>
               <br>
               <p class="w-[590px] left-0 top-0 relative text-justify text-neutral-500 text-xl font-normal font-Playfair leading-[34px]">Explore the world of exceptional coffee with us. Our carefully selected beans from around the globe promise a flavor adventure like no other. Whether you're a fan of strong, dark roasts or prefer the gentle taste of light blends, we've got something for everyone.</p>
             </div>
           </div>
-          <img class="w-[377px] h-[273px] relative bottom-40" src="./img/coffee_blast.png" />
+          <img class="w-[377px] h-[273px] relative bottom-40" src="/img/coffee_blast.png" />
         </div>
         
 
@@ -67,7 +72,7 @@
             <div id="Here the shit" class="flex flex-row justify-center space-x-3 top-5 w-screen relative ">
               <div class="flex relative">
                 <div class="w-[280px] h-[364px] left-0 top-0 absolute bg-orange-50 border border-orange-300/opacity-40"></div>
-                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="./img/Rectangle 7.png" />
+                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="/img/Rectangle 7.png" />
                 <div class="w-[134px] h-12 left-[73px] top-[340px] absolute">
                   <div class="w-[134px] h-12 left-0 top-0 absolute bg-orange-300 rounded-3xl shadow"></div>
                   <div class="left-[26px] top-[14px] absolute text-stone-900 text-base font-bold font-Playfair">Order Now</div>
@@ -80,7 +85,7 @@
               </div>
               <div class="flex relative">
                 <div class="w-[280px] h-[364px] left-0 top-0 absolute bg-orange-50 border border-orange-300/opacity-40"></div>
-                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="./img/Rectangle 9.png" />
+                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="/img/Rectangle 9.png" />
                 <div class="w-[134px] h-12 left-[73px] top-[340px] absolute">
                   <div class="w-[134px] h-12 left-0 top-0 absolute bg-orange-300 rounded-3xl shadow"></div>
                   <div class="left-[26px] top-[14px] absolute text-stone-900 text-base font-bold font-Playfair">Order Now</div>
@@ -93,7 +98,7 @@
               </div>
               <div class="flex relative">
                 <div class="w-[280px] h-[364px] left-0 top-0 absolute bg-orange-50 border border-orange-300/opacity-40"></div>
-                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="./img/Rectangle 11.png" />
+                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="/img/Rectangle 11.png" />
                 <div class="w-[134px] h-12 left-[73px] top-[340px] absolute">
                   <div class="w-[134px] h-12 left-0 top-0 absolute bg-orange-300 rounded-3xl shadow"></div>
                   <div class="left-[26px] top-[14px] absolute text-stone-900 text-base font-bold font-Playfair">Order Now</div>
@@ -106,7 +111,7 @@
               </div>
               <div class="flex relative">
                 <div class="w-[280px] h-[364px] left-0 top-0 absolute bg-orange-50 border border-orange-300/opacity-40"></div>
-                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="./img/Rectangle 13.png" />
+                <img class="w-[280px] h-[222px] left-0 top-0 relative" src="/img/Rectangle 13.png" />
                 <div class="w-[134px] h-12 left-[73px] top-[340px] absolute">
                   <div class="w-[134px] h-12 left-0 top-0 absolute bg-orange-300 rounded-3xl shadow"></div>
                   <div class="left-[26px] top-[14px] absolute text-stone-900 text-base font-bold font-Playfair">Order Now</div>
@@ -120,7 +125,7 @@
             </div>
           </div>
           <div class="w-screen flex relative justify-end">
-            <img class="w-[371px] h-[261px] left-0 top-0 relative" src="./img/coffee_blast(1).png" />
+            <img class="w-[371px] h-[261px] left-0 top-0 relative" src="/img/coffee_blast(1).png" />
           </div>
         </div>
 
@@ -138,7 +143,7 @@
               <div class="w-[201px] h-[212px] left-[39px] top-[36px] absolute">
                 <div class="left-0 top-[113px] absolute text-yellow-900 text-[28px] font-bold font-Playfair">Supreme Beans</div>
                 <div class="left-[13px] top-[158px] absolute text-center text-neutral-500 text-xl font-normal font-Playfair">Beans that provides<br/>great taste</div>
-                <img class="w-[88px] h-[88px] left-[57px] top-0 absolute" src="./img/coffee-beans 1.png" />
+                <img class="w-[88px] h-[88px] left-[57px] top-0 absolute" src="/img/coffee-beans 1.png" />
               </div>
             </div>
             <div class="w-[280px] h-[284px] left-0 top-0 relative">
@@ -146,7 +151,7 @@
               <div class="w-[166px] h-[212px] left-[57px] top-[36px] absolute">
                 <div class="left-0 top-[113px] absolute text-yellow-900 text-[28px] font-bold font-Playfair">High Quality</div>
                 <div class="left-[16px] top-[158px] absolute text-center text-neutral-500 text-xl font-normal font-Playfair">We provide the<br/>highest quality</div>
-                <img class="w-[88px] h-[88px] left-[39px] top-0 absolute" src="./img/badge 1.png" />
+                <img class="w-[88px] h-[88px] left-[39px] top-0 absolute" src="/img/badge 1.png" />
               </div>
             </div>
             <div class="w-[280px] h-[284px] left-0 top-0 relative">
@@ -154,7 +159,7 @@
               <div class="w-[183px] h-[212px] left-[49px] top-[36px] absolute">
                 <div class="left-0 top-[113px] absolute text-yellow-900 text-[28px] font-bold font-Playfair">Extraordinary </div>
                 <div class="left-[3px] top-[158px] absolute text-center text-neutral-500 text-xl font-normal font-Playfair">Coffee like you have<br/>never tasted</div>
-                <img class="w-[88px] h-[88px] left-[48px] top-0 absolute" src="./img/coffee-cup 1.png" />
+                <img class="w-[88px] h-[88px] left-[48px] top-0 absolute" src="/img/coffee-cup 1.png" />
               </div>
             </div>
             <div class="w-[280px] h-[284px] left-0 top-0 relative">
@@ -162,7 +167,7 @@
               <div class="w-[211px] h-[212px] left-[35px] top-[36px] absolute">
                 <div class="left-0 top-[113px] absolute text-yellow-900 text-[28px] font-bold font-Playfair">Affordable Price</div>
                 <div class="left-[10px] top-[158px] absolute text-center text-neutral-500 text-xl font-normal font-Playfair">Our Coffee prices are<br/>easy to afford</div>
-                <img class="w-[88px] h-[88px] left-[62px] top-0 absolute" src="./img/best-price 1.png" />
+                <img class="w-[88px] h-[88px] left-[62px] top-0 absolute" src="/img/best-price 1.png" />
               </div>
             </div>
           </div>
@@ -175,7 +180,7 @@
 
         <div id="Fifth-Content" class="w-screen h-fit left-0 top-0 relative">
           <div class="w-screen h-[574px] left-0 top-0 relative">
-            <img class="w-screen h-[574px] bg-[url('/src/img/hot_coffee.png')] bg-cover bg-no-repeat bg-center bg-fixed left-0 top-0 relative" src="./img/tytyd.png" />
+            <img class="w-screen h-[574px] bg-[url('/src/img/hot_coffee.png')] bg-cover bg-no-repeat bg-center bg-fixed left-0 top-0 relative" src="/img/tytyd.png" />
           </div>
           <div class="w-[575px] h-[304px] left-[93px] top-[135px] absolute">
             <div class="left-[4px] top-[166px] absolute text-white text-xl font-normal font-Playfair leading-[34px]">We are giving you are one time opportunity to<br/>experience a better life with coffee.</div>
@@ -185,8 +190,8 @@
               <div class="left-[26px] top-[14px] absolute text-stone-900 text-base font-bold font-Playfair">Order Now</div>
             </div>
           </div>
-          <img class="w-[533px] h-[574px] bottom-0 right-0 absolute" src="./img/coffee_bean.png" />
-          <img class="w-[300px] h-[467px] bottom-5 right-28 absolute shadow" src="./img/cup.png" />
+          <img class="w-[533px] h-[574px] bottom-0 right-0 absolute" src="/img/coffee_bean.png" />
+          <img class="w-[300px] h-[467px] bottom-5 right-28 absolute shadow" src="/img/cup.png" />
         </div>
 
         <div id="Sixth-Content">
@@ -204,17 +209,17 @@
                   <div class="w-[130.19px] relative text-center text-neutral-500 text-xl font-normal font-Playfair leading-[34px] whitespace-nowrap">Coffee’s Owner</div>
                 </div>
               </div>
-              <img class="w-[105.66px] h-28 -top-14 left-2 relative rounded-2xl shadow" src="./img/pain.png" />
+              <img class="w-[105.66px] h-28 -top-14 left-2 relative rounded-2xl shadow" src="/img/pain.png" />
             </div>
-            <img class="w-[469.80px] h-[272px] top-10 right-0 absolute" src="./img/betuah_punya_blast.png" />
-            <img class="w-[390.56px] h-[226px] bottom-0 left-0 absolute" src="./img/tak_guna_blast.png" />
+            <img class="w-[469.80px] h-[272px] top-10 right-0 absolute" src="/img/betuah_punya_blast.png" />
+            <img class="w-[390.56px] h-[226px] bottom-0 left-0 absolute" src="/img/tak_guna_blast.png" />
           </div>
         </div>
 
       <div id="Footer-Conten" class="w-screen flex flex-col relative top-40">
         <div id="Footer-Content-First" class="flex flex-col justify-center relative w-screen h-[374px]">
           <div class="w-screen h-[374px] left-0 top-0 relative">
-            <img class="w-screen h-[374px] bg-[url('/src/img/hot_coffee.png')] bg-cover bg-no-repeat bg-center  left-0 top-0 relative" src="./img/tytyd.png" />
+            <img class="w-screen h-[374px] bg-[url('/src/img/hot_coffee.png')] bg-cover bg-no-repeat bg-center  left-0 top-0 relative" src="/img/tytyd.png" />
           </div>        
           <div class="w-screen h-[241px] justify-center items-center flex flex-col absolute">
             <div class="w-[980px] h-[122px] left-0 top-0 relative">
@@ -232,7 +237,7 @@
           </div>
         </div>
           <div id="Footer-Content-Second" class="flex flex-row w-screen relative">
-            <img id="Very-Footer-Opacity" class="w-screen bg-cover bg-bottom bg-no-repeat bg-[url('/src/img/fotter_image(1).png')] left-0 top-0 absolute" src="./img/tytyd.png" />
+            <img id="Very-Footer-Opacity" class="w-screen bg-cover bg-bottom bg-no-repeat bg-[url('/src/img/fotter_image(1).png')] left-0 top-0 absolute" src="/img/tytyd.png" />
             
             <div class="relative flex-1 flex-row h-full top-44 items-baseline w-screen">
               
@@ -245,17 +250,17 @@
                 <div class="left-0 top-10 relative justify-start items-start gap-2 inline-flex">
                   <div class="w-10 h-10 relative rounded">
                     <div class="w-6 h-6 left-[8px] top-[8px] absolute">
-                      <img class="w-5 h-[19.92px] left-[2px] top-[2.04px] absolute" src="./img/Icon.png" />
+                      <img class="w-5 h-[19.92px] left-[2px] top-[2.04px] absolute" src="/img/Icon.png" />
                     </div>
                   </div>
                   <div class="w-10 h-10 relative rounded">
                     <div class="w-6 h-6 left-[8px] top-[8px] absolute">
-                      <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="./img/Icon (2).png" />
+                      <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="/img/Icon (2).png" />
                     </div>
                   </div>
                   <div class="w-10 h-10 relative rounded">
                     <div class="w-6 h-6 left-[8px] top-[8px] absolute">
-                      <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="./img/Icon (3).png" />
+                      <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="/img/Icon (3).png" />
                     </div>
                   </div>
                 </div>
@@ -285,8 +290,8 @@
 
             </div>
             <div class="w-screen top-36 h-[358px] justify-center absolute flex">
-              <img class="end-0 w-[297px] h-[358px] absolute" src="./img/pngwing 2.png" />
-              <img class="start-0 w-[297px] h-[358px] absolute" src="./img/pngwing 1.png" />
+              <img class="end-0 w-[297px] h-[358px] absolute" src="/img/pngwing 2.png" />
+              <img class="start-0 w-[297px] h-[358px] absolute" src="/img/pngwing 1.png" />
             </div>
           </div>
         

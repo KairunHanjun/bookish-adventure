@@ -17,31 +17,35 @@
           <form action="" method="post" th:action="@{/auth/trueVerify}" th:object="${user}">
             <div class="flex flex-col gap-3">
                 <div class="flex-col relative justify-start items-start gap-4 flex">
-                    <input name="usernameOTP" th:value="${user}" th:readonly="${user != null && user == 'edit'}" required placeholder="Username" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+                    <input name="usernameOTP" th:value="${user}" th:readonly="${user != null}" required placeholder="Username" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
                 </div>
                 <div class="flex-col relative justify-start items-start gap-4 flex">
-                  <input name="OTP" required placeholder="OTP Code" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+                  <input name="OTP" placeholder="OTP Code" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
                 </div>
-                <div class="w-[400px] relative flex flex-row ">
-                    <button type="submit" class=" relative top-0 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 rounded-lg left-0 h-10 bg-transparent min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Verify</button>
-                </div>
+                <div class="w-1/2 relative flex flex-row ">
+                  <button type="submit" class=" relative top-0 transition ease-in-out delay-150 bg-gradient-to-r from-pink-500 to-yellow-500 hover:-translate-y-1 hover:scale-110 hover:from-green-400 hover:to-blue-500 duration-300 rounded-lg left-0 h-10 min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Verify</button>
+                  <button type="submit" name="action" value="resendotp" class=" relative top-0 transition ease-in-out delay-150 bg-gradient-to-r button from-green-400 to-blue-500 hover:-translate-y-1 hover:scale-110 hover:from-pink-500 hover:to-yellow-500 duration-300 rounded-lg left-0 h-10 min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Re-Send OTP</button>
+              </div>
             </div>
         </form>
         <div th:object="${error}" th:hidden="${error == null}" class="w-[400px] left-0 top-0 relative text-center">
           <span style="color: red;" class="text-base font-['Inter'] leading-normal" th:text="${error}"></span>
         </div>
+        <div th:object="${info}" th:hidden="${info == null}" class="w-[400px] left-0 top-0 relative text-center">
+          <span style="color: aqua;" class="text-base font-['Inter'] leading-normal" th:text="${info}"></span>
+        </div>
         <div class="w-[400px] left-0 top-0 relative text-center">
             <span class="text-zinc-500 text-base font-['Inter'] leading-normal">By clicking continue, you agree to our </span>
-            <a href="/static/auth" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Terms of Service</a>
+            <a href="../static/TOS" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Terms of Service</a>
             <span class="text-zinc-500 text-base font-normal font-['Inter'] leading-normal"> and </span>
-            <a href="/static/Privacy" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Privacy Policy</a>
+            <a href="../static/Privacy" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Privacy Policy</a>
         </div>
         </div>
         <div class="absolute left-4 top-4 h-16 w-16 text-black text-xl font-semibold font-Inter leading-[30px]">Register</div>
         <div class="absolute top-0 right-4 h-16 w-16 justify-end items-center gap-10 inline-flex">
           <button th:onclick="|window.location.href='./'|" class="text-black text-xl font-medium font-mono leading-[30px]">Home</button>
           <button th:onclick="|window.location.href='./'|" class="text-black text-xl font-medium font-mono leading-[30px]">Menu</button>
-          <button th:onclick="|window.location.href='./static/about.html'|" class="text-black text-xl font-medium font-mono leading-[20px] whitespace-nowrap">About US</button>
+          <button th:onclick="|window.location.href='../static/about.html'|" class="text-black text-xl font-medium font-mono leading-[20px] whitespace-nowrap">About US</button>
           <button th:onclick="|window.location.href='./auth/login'|" class="px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">
             <div class="text-orange-50 text-base font-medium font-mono leading-normal">Login</div>
           </button>

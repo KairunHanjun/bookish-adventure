@@ -19,6 +19,8 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// AUTO GENERATED DO NOT EDIT (EDIT AT YOUR OWN RISK)
+
 @Data
 @NoArgsConstructor
 @Entity

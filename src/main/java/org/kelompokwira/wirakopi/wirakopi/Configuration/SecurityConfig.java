@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,12 +26,25 @@ public class SecurityConfig {
         .requestMatchers("/static/**").permitAll().requestMatchers("/").permitAll()
         .requestMatchers("/css/**").permitAll().requestMatchers("/img/**").permitAll()
         .requestMatchers("/user/**").hasRole("USER")
+        .requestMatchers("/auth/login/{username}").permitAll()
+        .requestMatchers("/auth/login/{password}").permitAll()
         .anyRequest().authenticated())
-        .exceptionHandling((error) -> error.accessDeniedPage("/403"))
+        .exceptionHandling(
+            (error) -> error
+            .accessDeniedPage("/auth/forbidYou")
+            )
         .formLogin(
             (login) -> 
             login.loginPage("/auth/login").permitAll()
-            .successForwardUrl("/user/userProfile")
+            .usernameParameter("username")
+            .passwordParameter("password")
+            .defaultSuccessUrl("/", true)
+            .failureUrl("/auth/error")
+        )
+        .logout(
+            (logout) -> logout
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/auth/login")    
         )
         .sessionManagement((session) -> session.maximumSessions(1).expiredUrl("/auth/login?expired=true"))
         .build();

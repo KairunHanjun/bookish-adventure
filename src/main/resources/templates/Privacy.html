@@ -4,7 +4,7 @@
     <title>Wira Ganteng Sedunia</title>
     <meta name="description" content="Our first page">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/output.css">
+    <link rel="stylesheet" href="../css/output.css">
     <!-- <script src="./main.js"></script>  -->
 </head>
 <body>
@@ -15,7 +15,12 @@
                 <a href="./static/index" class="text-black hover:underline hover:text-blue-700 text-xl font-medium font-['Inter'] leading-[30px]">Home</a>
                 <a href="#" class="text-black hover:underline hover:text-blue-700 text-xl font-medium font-['Inter'] leading-[30px]">Menu</a>
                 <a href="./static/TOS.html" class="text-black hover:underline hover:text-blue-700 whitespace-nowrap text-xl font-medium font-['Inter'] leading-[30px]">Term of Services</a>
-                <a href="./auth/login"><button class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Login</button></a>
+                <div sec:authorize="!isAuthenticated()">
+                    <a href="../auth/login"><button type="button" class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Login</button></a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                  <a href="../logout"> <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">Logout</button> </a>
+                </div>
             </div>
         </div>
         <div class="w-screen flex-1 flex justify-center">

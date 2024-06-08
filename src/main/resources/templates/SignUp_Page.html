@@ -9,57 +9,54 @@
             <script src="./main.js"></script> 
         </head>
     <body>
-        <div class="min-h-screen flex flex-col bg-white">
-            <div class="h-screen justify-center flex-col items-center gap-2 inline-flex">
-              <div class="flex-col justify-start items-center gap-1 flex">
-                <div class="text-center text-black text-2xl font-semibold font-Inter leading-9">Create an account</div>
-                <div class="text-center text-black text-base font-normal font-Inter leading-normal">Enter your email to sign up for this app</div>
-              </div>
-              <form action="" method="post" th:action="@{/auth/register}" th:object="${user}">
-                <div class="flex flex-col gap-3">
-                    <div class="flex-col relative justify-start items-start gap-4 flex">
-                        <input required maxlength="100" minlength="10" type="email" th:field="*{Email}" placeholder="Email (example@example.com)" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
-                    </div>
-                    <div class="flex-col relative justify-start items-start gap-4 flex">
-                      <input required type="text" th:field="*{Username}" minlength="10" maxlength="40" placeholder="Username (Must be unique)" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
-                  </div>
-                    <div class="flex-col relative justify-start items-start gap-4 flex">
-                        <input required th:field="*{Password}" minlength="10" maxlength="20" type="password" placeholder="Password" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
-                    </div>
-                    <div class="w-1/2 relative flex flex-row ">
-                        <button type="submit" class=" relative top-0 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 rounded-lg left-0 h-10 bg-transparent min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Register</button></a>
-                        <button th:onclick="|window.location.href='/auth/WiraSuruhFigma'|" type="button" class=" relative top-0 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 rounded-lg left-0 h-10 bg-transparent min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Verify</button>
-                    </div>
+      <div class="w-screen h-screen flex-col-reverse flex relative bg-white">
+
+        <div class="flex relative flex-1 justify-center flex-col items-center">
+            <div class="flex-col relative justify-start items-center gap-1 flex">
+                <div class="text-center text-black text-2xl font-semibold font-['Inter'] leading-9">Register</div>
+                <div class="text-center text-black text-base font-normal font-['Inter'] leading-normal">Enter your email, username, and password</div>
+            </div>
+            <form action="" method="post" th:action="@{/auth/register}" th:object="${user}">
+              <div class="flex flex-col gap-3">
+                <div class="flex-col relative justify-start items-start gap-4 flex">
+                    <input required maxlength="100" minlength="10" type="email" th:field="*{Email}" placeholder="Email (example@example.com)" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
                 </div>
+                <div class="flex-col relative justify-start items-start gap-4 flex">
+                  <input required type="text" th:field="*{Username}" minlength="10" maxlength="40" placeholder="Username (Must be unique)" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+              </div>
+                <div class="flex-col relative justify-start items-start gap-4 flex">
+                    <input required th:field="*{Password}" minlength="10" maxlength="20" type="password" placeholder="Password" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+                </div>
+                <div class="flex-col relative justify-start items-start gap-4 flex">
+                  <input required th:field="*{RePassword}" minlength="10" maxlength="20" type="password" placeholder="Re-Password" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+              </div>
+                <div class="w-1/2 relative flex flex-row ">
+                    <button type="submit" class=" relative top-0 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 rounded-lg left-0 h-10 min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Register</button>
+                    <button th:onclick="|window.location.href='../auth/WiraSuruhFigma'|" type="button" class=" relative top-0 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 rounded-lg left-0 h-10 min-w-full text-center text-black text-base font-medium font-['Inter'] leading-normal">Verify</button>
+                </div>
+            </div>
             </form>
             <div th:object="${error}" th:hidden="${error == null}" class="w-[400px] left-0 top-0 relative text-center">
-              <span style="color: red;" class="text-base font-['Inter'] leading-normal" th:text="${error}"></span>
+                <span style="color: red;" class="text-base font-['Inter'] leading-normal" th:text="${error}"></span>
             </div>
-              <div class="w-[400px] left-0 top-0 relative justify-center items-center gap-2 inline-flex">
-                <div class="grow shrink basis-0 h-px bg-neutral-200"></div>
-                <div class="text-center text-zinc-500 text-base font-normal font-['Inter'] leading-normal">or continue with</div>
-                <div class="grow shrink basis-0 h-px bg-neutral-200"></div>
+            <div class="flex flex-col space-y-4 relative">
+                <div class="w-[400px] left-0 top-0 relative text-center">
+                    <span class="text-zinc-500 text-base font-['Inter'] leading-normal">By clicking continue, you agree to our </span>
+                    <a href="../static/TOS.html" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Terms of Service</a>
+                    <span class="text-zinc-500 text-base font-normal font-['Inter'] leading-normal"> and </span>
+                    <a href="../static/Privacy.html" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Privacy Policy</a>
+                </div>
             </div>
-              <button class="pl-3.5 pr-[172.50px] py-2 bg-zinc-100 rounded-lg justify-start items-center gap-[138.50px] inline-flex">
-                <div class="w-5 h-5 relative flex-col justify-start items-start flex"></div>
-                <div class="text-black text-base font-medium font-Inter leading-normal">Google</div>
-              </button>
-              <div class="w-[400px] left-0 top-0 relative text-center">
-                <span class="text-zinc-500 text-base font-['Inter'] leading-normal">By clicking continue, you agree to our </span>
-                <a href="./TOS.html" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Terms of Service</a>
-                <span class="text-zinc-500 text-base font-normal font-['Inter'] leading-normal"> and </span>
-                <a href="./Privacy.html" class="text-black text-base hover:underline hover:text-blue-700 font-normal font-['Inter'] leading-normal">Privacy Policy</a>
+        </div>
+        <div class="flex flex-row top-8 w-screen justify-between relative">
+            <div class="flex start-5 items-center relative text-black text-xl font-semibold font-['Inter']">Register</div>
+            <div class="relative end-8 items-center gap-12 flex">
+                <a href="/" class="text-black hover:underline hover:text-blue-700 text-xl font-medium font-['Inter'] leading-[30px]">Home</a>
+                <a href="#" class="text-black hover:underline hover:text-blue-700 text-xl font-medium font-['Inter'] leading-[30px]">Menu</a>
+                <a href="../static/about.html" class="text-black hover:underline hover:text-blue-700 whitespace-nowrap text-xl font-medium font-['Inter'] leading-[30px]">About Us</a>
+                <button th:onclick="|window.location.href='../auth/login'|" class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Masuk</button>
             </div>
-            </div>
-            <div class="absolute left-4 top-4 h-16 w-16 text-black text-xl font-semibold font-Inter leading-[30px]">Register</div>
-            <div class="absolute top-0 right-4 h-16 w-16 justify-end items-center gap-10 inline-flex">
-              <button th:onclick="|window.location.href='/'|" class="text-black text-xl font-medium font-mono leading-[30px]">Home</button>
-              <button class="text-black text-xl font-medium font-mono leading-[30px]">Menu</button>
-              <button th:onclick="|window.location.href='./static/about.html'|" class="text-black text-xl font-medium font-mono leading-[20px] whitespace-nowrap">About US</button>
-              <button th:onclick="|window.location.href='/auth/login'|" class="px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">
-                <div class="text-orange-50 text-base font-medium font-mono leading-normal">Login</div>
-              </button>
-            </div>
-          </div>
+        </div>
+    </div>
     </body>
 </html>

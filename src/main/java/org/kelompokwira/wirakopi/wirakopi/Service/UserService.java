@@ -19,5 +19,4 @@ public interface UserService {
     boolean login(String passHash, String userEmail);
     Iterable<String> allUsernamebyEmail(String email);
     public String sendOTP(String toWhere, String OTP);
-    String updateUser(User user);
 }

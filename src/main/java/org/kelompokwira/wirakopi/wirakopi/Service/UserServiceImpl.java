@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
                     return "What?";
             }
             userRepo.save(changeUser);
-            return "Yeeepeee";
+            return "Success";
         }catch(Exception e){return e.getMessage();}
     }
 
@@ -124,17 +124,6 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return e.getMessage();
         }
-    }
-
-    @Override
-    public String updateUser(User user) {
-        try{
-            userRepo.deleteById(user.getId());
-            register(user);
-        }catch(Exception e){
-            return e.getMessage();
-        }
-        return "Success";
     }
     
 }
