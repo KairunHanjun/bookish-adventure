@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
@@ -39,6 +40,8 @@ public class User implements UserDetails{
     private Long id;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<UserAuthorities> listAuthorities = new ArrayList<>();
+    @OneToOne
+    private UserInfo userInfo = new UserInfo();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.listAuthorities;

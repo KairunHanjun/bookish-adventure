@@ -1,0 +1,162 @@
+<html lang="en">
+<head>
+    <title>Wira Ganteng Sedunia</title>
+    <meta name="description" content="Our first page">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/output.css">
+</head>
+<body>
+    <div class=" bg-white flex-col justify-start items-center gap-[66px] inline-flex">
+        <div class="w-screen h-[83px] relative flex flex-row-reverse bg-orange-200">
+            <div class="right-4 relative justify-end items-center gap-12 inline-flex">
+              <button class="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Cart">
+                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span class="absolute inset-0 object-right-top -mr-6">
+                  <div class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                    6
+                  </div>
+                </span>
+              </button>
+              <button th:onclick="|window.location.href='../'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Home</div></button>
+              <button><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Menu</div></button>
+              <button th:onclick="|window.location.href='../static/about'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">About Us </div></button>
+              <div class="px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">
+                <button th:onclick="|window.location.href='../auth/login'|" class="text-white text-base font-medium font-['Inter'] leading-normal">Login</button>
+              </div>
+            </div>
+            <img class="w-[106px] h-[61px] left-[12px] top-[10px] absolute rounded-lg" src="../img/tytyd_imut.png" />
+        </div>
+
+        <div class=" text-black text-2xl relative font-normal font-['Inter'] leading-9">Menu</div>
+
+        <div class=" w-full h-full justify-center flex duration-700 ease-in-out">
+            <div class="w-full  flex-col justify-start items-start gap-[38px] inline-flex">
+                <div class="w-screen justify-center flex-row items-start gap-8 inline-flex">
+        
+                    
+                    <div class="relative flex-col justify-start items-start gap-6 inline-flex">
+                        <button th:onclick="|window.location.href='../static/product?product=Americano'|" class="w-[406px] h-[290px] bg-transparent relative ">
+                          <img class="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 w-[290px] h-[290px] left-[58px] top-0 absolute" src="../img/Gun.png " />
+                        </button>
+                        <div class="self-stretch h-[98px] flex-col justify-center items-start gap-1 flex">
+                          <button th:onclick="|window.location.href='../static/product?product=Americano'|" type="button" class="!bg-transparent"><div class="self-stretch hover:underline text-black text-xl font-medium font-['Inter'] leading-[30px]" >Americano</div></button>
+                          <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee 60%|Water 40%</div>
+                          <div class="self-stretch text-black text-xl font-medium font-['Inter'] leading-[30px]">Rp.25.000</div>
+                        </div>
+                      </div>
+            
+                      <div class="relative flex-col justify-start items-start gap-6 inline-flex">
+                        <button th:onclick="|window.location.href='../static/product?product=Macchiato'|" class="w-[406px] h-[290px] bg-transparent relative">
+                          <img class="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 left-0 top-0 absolute" src="../img/Mac.png" />
+                        </button>
+                        <div class="self-stretch h-[98px] flex-col justify-center items-start gap-1 flex">
+                          <button th:onclick="|window.location.href='../static/product?product=Macchiato'|" type="button" class="!bg-transparent"><div class="self-stretch hover:underline text-black text-xl font-medium font-['Inter'] leading-[30px]">Macchiato</div></button>
+                          <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee 60%|Milk 40%</div>
+                          <div class="self-stretch text-black text-xl font-medium font-['Inter'] leading-[30px]">Rp.30.000</div>
+                        </div>
+                      </div>
+            
+                        <div class="relative flex-col justify-start items-start gap-6 inline-flex">
+                          <button th:onclick="|window.location.href='../static/product?product=Expresso'|" class="bg-transparent w-[406px] h-[290px] relative">
+                            <img class="rounded-lg transition ease-in-out delay-150 object-cover hover:-translate-y-1 hover:scale-110 duration-300 w-[395px] h-[287px] left-[1px] top-[3px] absolute" src="../img/Ekspresi.png" />
+                          </button>
+                          <div class="self-stretch h-[98px] flex-col justify-center items-start gap-1 flex">
+                            <button th:onclick="|window.location.href='../static/product?product=Expresso'|" type="button" class="!bg-transparent"><div class="self-stretch hover:underline text-black text-xl font-medium font-['Inter'] leading-[30px]">Expresso</div></button>
+                            <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee 100%| Milk 0%</div>
+                            <div class="self-stretch text-black text-xl font-medium font-['Inter'] leading-[30px]">Rp.20.000</div>
+                          </div>
+                        </div>
+        
+                </div>
+              </div>
+        </div>
+
+        <div class=" w-full h-full justify-center flex duration-700 ease-in-out">
+            <div class="w-full  flex-col justify-start items-start gap-[38px] inline-flex">
+                <div class="w-screen justify-center flex-row items-start gap-8 inline-flex">
+        
+                    <div class="relative flex-col justify-start items-start gap-6 inline-flex">
+                        <button th:onclick="|window.location.href='../static/product'|" class="w-[406px] h-[290px] bg-transparent relative rounded-lg">
+                          <img class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 w-[290px] h-[290px] left-[58px] top-0 absolute" src="../img/betuah.png" />
+                        </button>
+                        <div class="self-stretch h-[98px] flex-col justify-center items-start gap-1 flex">
+                          <button th:onclick="|window.location.href='../static/product'|" type="button" class="!bg-transparent"><div class="self-stretch hover:underline text-black text-xl font-medium font-['Inter'] leading-[30px]" >Cappuccino</div></button>
+                          <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee 70%|Milk 30%</div>
+                          <div class="self-stretch text-black text-xl font-medium font-['Inter'] leading-[30px]">Rp.35.000</div>
+                        </div>
+                      </div>
+            
+                      <div class="relative flex-col justify-start items-start gap-6 inline-flex">
+                        <button th:onclick="|window.location.href='../static/product?product=IceVL'|" class="w-[406px] h-[290px] bg-transparent relative rounded-lg">
+                          <img class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 left-0 top-0 absolute" src="../img/IceVL.png" />
+                        </button>
+                        <div class="self-stretch h-[98px] flex-col justify-center items-start gap-1 flex">
+                          <button th:onclick="|window.location.href='../static/product?product=IceHL'|" type="button" class="!bg-transparent"><div class="self-stretch hover:underline text-black text-xl font-medium font-['Inter'] leading-[30px]">Ice Vanila Latte</div></button>
+                          <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee 35%|Milk 45%|Syrup Vanila 20%</div>
+                          <div class="self-stretch text-black text-xl font-medium font-['Inter'] leading-[30px]">Rp.30.000</div>
+                        </div>
+                      </div>
+            
+                        <div class="relative flex-col justify-start items-start gap-6 inline-flex">
+                          <button th:onclick="|window.location.href='../static/product?product=IceHL'|" class="bg-transparent w-[406px] h-[290px] relative rounded-lg">
+                            <img class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 w-[395px] h-[287px] left-[1px] top-[3px] absolute" src="../img/IceHL.png" />
+                          </button>
+                          <div class="self-stretch h-[98px] flex-col justify-center items-start gap-1 flex">
+                            <button th:onclick="|window.location.href='../static/product?product=IceHL'|" type="button" class="!bg-transparent"><div class="self-stretch hover:underline text-black text-xl font-medium font-['Inter'] leading-[30px]">Ice Hazelnut Latte</div></button>
+                            <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee 35%|Milk 45%|Syrup Hazelnut 20%</div>
+                            <div class="self-stretch text-black text-xl font-medium font-['Inter'] leading-[30px]">Rp.30.000</div>
+                          </div>
+                        </div>
+        
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <div class="w-screen top-20 relative bg-orange-200">
+        <div class="w-screen items-center flex flex-row relative">
+            <div class="flex w-screen flex-col">
+                <div class="text-black relative left-10 text-2xl font-normal font-['Inter'] leading-9">www.skyscoffee.com</div>
+                <div class="relative left-8 justify-start items-start gap-2 inline-flex">
+                    <div class="w-10 h-10 relative rounded">
+                        <button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
+                        <img class="w-5 h-[19.92px] left-[2px] top-[2.04px] absolute" src="../img/Icon.png" />
+                        </button>
+                    </div>
+                    <div class="w-10 h-10 relative rounded">
+                        <button class="w-6 h-6 bg-black rounded-xl left-[8px] top-[8px] absolute">
+                        <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="../img/Icon (2).png" />
+                        </button>
+                    </div>
+                    <div class="w-10 h-10 relative rounded">
+                        <button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
+                        <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="../img/Icon (3).png" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w-screen flex relative m-auto justify-end space-x-28 flex-row right-20 end-0">
+                <div class="w-[102px] h-[216px] left-0 top-0 relative">
+                    <div class="left-0 top-0 absolute text-orange-400 text-[26px] font-bold font-Playfair">About</div>
+                    <div class="left-0 top-[40px] absolute text-orange-400 text-lg font-normal font-Playfair leading-[42px]">Menu<br/>Social Media<br/>About Us</div>
+                </div>
+                <div class="w-[134px] h-[174px] left-0 top-0 relative">
+                    <div class="left-0 top-0 absolute text-orange-400 text-[26px] font-bold font-Playfair">Company</div>
+                    <div class="left-0 top-[40px] absolute text-orange-400 text-lg font-normal font-Playfair leading-[42px]">Terms of service<br/>FAQ</div>
+                </div>
+                <div class="w-[332px] h-[258px] left-0 top-0 relative">
+                    <div class="left-0 top-0 absolute text-orange-400 text-[26px] font-bold font-Playfair">Contact Us</div>
+                    <div class="w-[332px] h-48 left-0 top-[48.5px] absolute">
+                        <div class="w-[332px] h-[54px] left-0 top-0 absolute text-orange-400 text-lg font-normal font-Playfair">Jl. Kelapa Dua Raya No.93, Klp. Dua, Kec. Klp. Dua, Kabupaten Tangerang, Banten 15810</div>
+                        <div class="left-0 top-[82px] absolute text-orange-400 text-lg font-normal font-Playfair">+6281367911749 </div>
+                        <div class="left-0 top-[122px] absolute text-orange-400 text-lg font-normal font-Playfair">skyscoffeeid@gmail.com</div>
+                        <div class="left-0 top-[168px] absolute text-orange-400 text-lg font-normal font-Playfair">www.skyscoffee.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,7 +1,6 @@
 package org. kelompokwira.wirakopi.wirakopi.Controller;
 
 import java.util.List;
-import java.util.Optional;
 
 //import org.apache.commons.codec.digest.DigestUtils;
 import org.kelompokwira.wirakopi.wirakopi.Entity.User;
@@ -31,6 +30,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 
@@ -72,7 +72,7 @@ public class WiraController {
     // }
 
 //===============================================================================================
-//                              DISINI ADALAH SEBUAH KONTROL UNTUK PAGE
+//            DISINI ADALAH SEBUAH KONTROL UNTUK PAGE - HERE CONTROL FOR YOUR HEADACHE
 //===============================================================================================
     //===================================================== 
     @RequestMapping("/")
@@ -95,9 +95,18 @@ public class WiraController {
     public ModelAndView FAQ() {
         return new ModelAndView("FAQ");
     }
+    @RequestMapping("/static/product")
+    public ModelAndView requestMethodName(@RequestParam(name = "product", required = false) String param) {
+        String paramNull = param == null ? "" : param;
+        return new ModelAndView("product").addObject("product", paramNull);
+    }
+    @RequestMapping("/static/menu")
+    public ModelAndView yeet() {
+        return new ModelAndView("menu");
+    }
     //=====================================================
 
-    //=====================================================
+    //THIS AUTH THING GIVE ME A HEADACHE - KONTROL UNTUK AUTENTIKASI
     @GetMapping("/auth/login")
     public ModelAndView josAndView(@AuthenticationPrincipal User user) {
         if(user == null) return new ModelAndView("SignIn_Page");
@@ -106,7 +115,6 @@ public class WiraController {
     
     @GetMapping("/auth/lupa")
     public ModelAndView lupa(@AuthenticationPrincipal User user) {
-        //TODO: if redirect by /auth/trueVerify then do something
         if(user != null) return new ModelAndView("redirect:/");
         return new ModelAndView("Forget_Password").addObject("user", new UserSafe());
     }
@@ -154,47 +162,11 @@ public class WiraController {
         return new ModelAndView("Forget_Password").addObject("user", new UserSafe()).addObject("yeay", "Password berhasil Diubah");
     }
     
-
-    //MUlai dari sini adalah method untuk proses data
     @GetMapping("/auth/WiraSuruhFigma")
     public ModelAndView FigmaWoi(@AuthenticationPrincipal User user) {
         if(user != null) return new ModelAndView("redirect:/");
         return (new ModelAndView("Verify"));
     }
-
-    @GetMapping("/user/userProfile")
-    public ModelAndView getMethodName() {
-        return new ModelAndView("userProfile");
-    }
-    
-    //HERE LAYS ALL ERROR BULLSHIT
-    @GetMapping("/auth/error")
-    public ModelAndView getMethodName(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        String errorMessage = null;
-        if (session != null) {
-            AuthenticationException ex = (AuthenticationException) session
-                    .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-            if (ex != null) {
-                errorMessage = ex.getMessage();
-            }
-        }
-        return new ModelAndView("SignIn_Page").addObject("error", errorMessage);
-    }
-    @GetMapping("/auth/forbidYou")
-    public ModelAndView forbid(HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        String errorMessage = null;
-        if (session != null) {
-            AccessDeniedException ex = (AccessDeniedException) session
-                    .getAttribute(WebAttributes.ACCESS_DENIED_403);
-            if (ex != null) {
-                errorMessage = ex.getMessage();
-            }
-        }
-        return new ModelAndView("forbidden").addObject("error", errorMessage);
-    }
-    //DONT UNDERESTIMATED MY POWER
 
     @PostMapping("/auth/trueVerify")
     public ModelAndView trueVerify(@RequestParam("usernameOTP") String username, @RequestParam("OTP") String OTP, @RequestParam(name = "action", required = false) String getAction) {
@@ -257,9 +229,49 @@ public class WiraController {
         String WiraGanteng = service.register(user);
         return WiraGanteng.equals("Success") ? (new ModelAndView("Verify").addObject("user", userSafe.getUsername())) : (new ModelAndView("SignUp_Page").addObject("error", WiraGanteng.equals("Success") ? null : WiraGanteng));
     }
-    //Verify/query?q="+user.Username
+    //THANK YOU VERY MUCH AUTH YOU DONE GAVE ME A SUFFER - AKHIR DARI KONTROL AUTENTIKASI
+    
+    //HERE LAYS ALL THE ERROR THING - SEKUMPULAN KONTROL BODOH DISINI
+    @GetMapping("/error/errorForYou")
+    public ModelAndView getMethodName(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String errorMessage = null;
+        if (session != null) {
+            AuthenticationException ex = (AuthenticationException) session
+                    .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            if (ex != null) {
+                errorMessage = ex.getMessage();
+            }
+        }
+        return new ModelAndView("SignIn_Page").addObject("error", errorMessage);
+    }
+    @GetMapping("/error/forbidYou")
+    public ModelAndView forbid(HttpServletRequest request, @AuthenticationPrincipal User user){
+        HttpSession session = request.getSession(false);
+        String errorMessage = null;
+        String userRole = user != null ? user.getAuthorities().iterator().next().getAuthority() : "None";
+        if (session != null) {
+            AccessDeniedException ex = (AccessDeniedException) session
+                    .getAttribute(WebAttributes.ACCESS_DENIED_403);
+            errorMessage = ex != null ? ex.getMessage() : (userRole + ": " + request.isUserInRole("ROLE_"+userRole));
+        }
+        return new ModelAndView("forbidden").addObject("error", errorMessage);
+    }
+    //DONT UNDERESTIMATED MY POWER - TERIMA KASIH TELAH MEMBERIKAN SAYA PENGARAHAN
+
+    //HERE WHAT THE USER CAN DO - KONTROL UNTUK PENGGUNA/USER DISINI
+    @GetMapping("/user/userProfile")
+    public ModelAndView getMethodName() {
+        return new ModelAndView("userProfile");
+    }
+
+    @PostMapping("/user/addcart")
+    public void postMethodName() {
+        //TODO: add product or add to cart here
+    }
+    //USER CAN DO NOTHING BECAUSE IM LAZY AF - KONTROL UNTUK USER/PENGGUNA SELESAI
 
 //===============================================================================================
-//                                      AKHIR DARI KONTROL PAGE
+//                   AKHIR DARI KONTROL PAGE - END OF THE HEADACHE THANK YOU
 //===============================================================================================
 }

@@ -25,13 +25,13 @@ public class SecurityConfig {
         return http.authorizeHttpRequests((req) -> req.requestMatchers("/auth/**").permitAll()
         .requestMatchers("/static/**").permitAll().requestMatchers("/").permitAll()
         .requestMatchers("/css/**").permitAll().requestMatchers("/img/**").permitAll()
-        .requestMatchers("/user/**").hasRole("USER")
+        .requestMatchers("/error/**").permitAll()
         .requestMatchers("/auth/login/{username}").permitAll()
         .requestMatchers("/auth/login/{password}").permitAll()
         .anyRequest().authenticated())
         .exceptionHandling(
             (error) -> error
-            .accessDeniedPage("/auth/forbidYou")
+            .accessDeniedPage("/error/forbidYou")
             )
         .formLogin(
             (login) -> 
@@ -39,7 +39,7 @@ public class SecurityConfig {
             .usernameParameter("username")
             .passwordParameter("password")
             .defaultSuccessUrl("/", true)
-            .failureUrl("/auth/error")
+            .failureUrl("/error/errorForYou")
         )
         .logout(
             (logout) -> logout

@@ -30,6 +30,6 @@ public class UserAuthorities implements GrantedAuthority {
     String authority;
     @Override
     public String toString() {
-        return "UserAuthorities [Id=" + Id + ", authority=" + authority + ", userEntityId=" + user.getUsername() + "]";
+        return "UserAuthorities [Id=" + Id + ", authority=" + "ROLE_" +authority + ", userEntityId=" + user.getUsername() + "]";
     }
 }
