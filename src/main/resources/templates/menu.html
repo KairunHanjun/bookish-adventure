@@ -22,8 +22,11 @@
               <button th:onclick="|window.location.href='../'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Home</div></button>
               <button><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Menu</div></button>
               <button th:onclick="|window.location.href='../static/about'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">About Us </div></button>
-              <div class="px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">
-                <button th:onclick="|window.location.href='../auth/login'|" class="text-white text-base font-medium font-['Inter'] leading-normal">Login</button>
+              <div sec:authorize="!isAuthenticated()">
+                <a href="../auth/login"><button type="button" class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Login</button></a>
+              </div>
+              <div sec:authorize="isAuthenticated()">
+                <a href="../logout"> <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">Logout</button> </a>
               </div>
             </div>
             <img class="w-[106px] h-[61px] left-[12px] top-[10px] absolute rounded-lg" src="../img/tytyd_imut.png" />

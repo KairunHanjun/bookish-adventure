@@ -19,13 +19,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests((req) -> req.requestMatchers("/auth/**").permitAll()
         .requestMatchers("/static/**").permitAll().requestMatchers("/").permitAll()
         .requestMatchers("/css/**").permitAll().requestMatchers("/img/**").permitAll()
-        .requestMatchers("/error/**").permitAll()
+        .requestMatchers("/error/**").permitAll().requestMatchers("/error").permitAll()
         .requestMatchers("/auth/login/{username}").permitAll()
         .requestMatchers("/auth/login/{password}").permitAll()
         .anyRequest().authenticated())

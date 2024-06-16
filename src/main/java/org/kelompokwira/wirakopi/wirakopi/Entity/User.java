@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -40,12 +41,17 @@ public class User implements UserDetails{
     private Long id;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<UserAuthorities> listAuthorities = new ArrayList<>();
-    @OneToOne
-    private UserInfo userInfo = new UserInfo();
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false, cascade = CascadeType.ALL)
+    private UserStuff userStuff;
+    @NotEmpty
+    private String name;
+    @NotEmpty
+    private String no_telp;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.listAuthorities;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

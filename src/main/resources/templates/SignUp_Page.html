@@ -19,6 +19,12 @@
             <form action="" method="post" th:action="@{/auth/register}" th:object="${user}">
               <div class="flex flex-col gap-3">
                 <div class="flex-col relative justify-start items-start gap-4 flex">
+                    <input required maxlength="100" minlength="10" type="text" th:field="*{Name}" placeholder="Name e.g Simon Hamour" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+                </div>
+                <div class="flex-col relative justify-start items-start gap-4 flex">
+                    <input required maxlength="100" minlength="10" type="text" th:field="*{Telp}" placeholder="Phone Number (0858883406504)" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+                </div>
+                <div class="flex-col relative justify-start items-start gap-4 flex">
                     <input required maxlength="100" minlength="10" type="email" th:field="*{Email}" placeholder="Email (example@example.com)" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
                 </div>
                 <div class="flex-col relative justify-start items-start gap-4 flex">

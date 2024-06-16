@@ -16,16 +16,19 @@
               <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
             </svg>
             <span class="absolute inset-0 object-right-top -mr-6">
-              <div class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
-                6
+              <div th:object="${ammount}" th:if="${ammount != null || ammount != 0}" class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                <p th:text="${ammount}"></p>
               </div>
             </span>
           </button>
           <button th:onclick="|window.location.href='../'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">Home</div></button>
           <button th:onclick="|window.location.href='../static/menu'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">Menu</div></button>
           <button th:onclick="|window.location.href='../static/about'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">About Us </div></button>
-          <div class="px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">
-            <button class="text-white text-base font-medium font-['Inter'] leading-normal">Login</button>
+          <div sec:authorize="!isAuthenticated()">
+            <a href="../auth/login"><button class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Login</button></a>
+          </div>
+          <div sec:authorize="isAuthenticated()">
+              <a href="../logout"> <button class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Logout</button> </a>
           </div>
         </div>
         <img class="w-[106px] h-[61px] left-[12px] top-[10px] absolute rounded-lg" src="../img/tytyd_imut.png" />
@@ -36,105 +39,123 @@
         <div th:object="${product}" class="top-10 relative w-full flex items-center justify-center mx-auto h-screen overflow-hidden rounded-lg">
             <!-- Item 1 -->
             <div th:if="${product == ''}" class="w-full h-full justify-center flex duration-700 ease-in-out">
+              <form method="post" th:action="@{/user/addcart}">
                 <div class="w-5/6 h-full flex-row items-center gap-[119px] inline-flex">
-                    <div class="w-[625px] h-full relative rounded-full">
-                      <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/betuah.png" />
-                    </div>
-                    <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
-                      <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Cappuccino</div>
-                      <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 70% | Milk 30%</div>
-                      <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.35.000 </div>
-                      <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">If u dont like sweet and still like coffee its the best choice for you!</div>
-                      <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
-                        <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
-                      </div>
+                  <div class="w-[625px] h-full relative rounded-full">
+                    <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/betuah.png" />
+                  </div>
+                  <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
+                    <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Cappuccino</div>
+                    <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 70% | Milk 30%</div>
+                    <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.35.000 </div>
+                    <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">If u dont like sweet and still like coffee its the best choice for you!</div>
+                    <input type="hidden" th:name="product" th:value="Cappuccino" />
+                    <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
+                      <button type="submit" class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
                     </div>
                   </div>
+                </div>
+              </form>
             </div>
             
             <div th:if="${product == 'Americano'}" class="w-full h-full justify-center flex duration-700 ease-in-out">
+              <form method="post" th:action="@{/user/addcart}">
                 <div class="w-5/6 h-full flex-row items-center gap-[119px] inline-flex">
-                    <div class="w-[625px] h-full relative rounded-xl">
-                      <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/Gun.png" />
-                    </div>
-                    <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
-                      <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Americano</div>
-                      <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 60%|Water 40%</div>
-                      <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.25.000 </div>
-                      <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">If like the taste of original coffee this is the perfect balance for start your day</div>
-                      <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
-                        <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
-                      </div>
+                  <div class="w-[625px] h-full relative rounded-xl">
+                    <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/Gun.png" />
+                  </div>
+                  <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
+                    <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Americano</div>
+                    <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 60%|Water 40%</div>
+                    <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.25.000 </div>
+                    <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">If like the taste of original coffee this is the perfect balance for start your day</div>
+                    <input type="hidden" th:name="product" th:value="Americano" />
+                    <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
+                      <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
                     </div>
                   </div>
+                </div>
+              </form>
             </div>
             
             <div th:if="${product == 'Macchiato'}" class=" w-full h-full justify-center flex duration-700 ease-in-out">
+              <form method="post" th:action="@{/user/addcart}">
                 <div class="w-5/6 h-full flex-row items-center gap-[119px] inline-flex">
-                    <div class="w-[625px] h-full relative rounded-xl">
-                      <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/Mac.png" />
-                    </div>
-                    <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
-                      <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Macchiato</div>
-                      <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 60%|Milk 40%</div>
-                      <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.30.000</div>
-                      <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">if you like coffee but milk serve you better than this is not the perfect one for you</div>
-                      <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
-                        <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
-                      </div>
+                  <div class="w-[625px] h-full relative rounded-xl">
+                    <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/Mac.png" />
+                  </div>
+                  <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
+                    <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Macchiato</div>
+                    <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 60%|Milk 40%</div>
+                    <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.30.000</div>
+                    <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">if you like coffee but milk serve you better than this is not the perfect one for you</div>
+                    <input type="hidden" th:name="product" th:value="Macchiato" />
+                    <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
+                      <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
                     </div>
                   </div>
+                </div>
+              </form>
             </div>
             
             <div th:if="${product == 'Expresso'}" class=" w-full h-full justify-center flex duration-700 ease-in-out" >
+              <form method="post" th:action="@{/user/addcart}">  
                 <div class="w-5/6 h-full flex-row items-center gap-[119px] inline-flex">
-                    <div class="w-[625px] h-full relative ">
-                      <img class="w-[625px] rounded-xl left-0 top-0 rounded-xl absolute" src="../img/Ekspresi.png" />
-                    </div>
-                    <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
-                      <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Expresso</div>
-                      <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 100%| Milk 0%</div>
-                      <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.20.000 </div>
-                      <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Go for it</div>
-                      <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
-                        <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
-                      </div>
+                  <div class="w-[625px] h-full relative ">
+                    <img class="w-[625px] rounded-xl left-0 top-0 rounded-xl absolute" src="../img/Ekspresi.png" />
+                  </div>
+                  <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
+                    <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Expresso</div>
+                    <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 100%| Milk 0%</div>
+                    <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.20.000 </div>
+                    <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Go for it</div>
+                    <input type="hidden" th:name="product" th:value="Expresso" />
+                    <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
+                      <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
                     </div>
                   </div>
+                </div>
+              </form>
             </div>
             
             <div th:if="${product == 'IceVL'}" class=" w-full h-full justify-center flex duration-700 ease-in-out">
+            <form method="post" th:action="@{/user/addcart}">
                 <div class="w-5/6 h-full flex-row items-center gap-[119px] inline-flex">
-                    <div class="w-[625px] h-full relative rounded-xl">
-                      <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/IceVL.png" />
-                    </div>
-                    <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
-                      <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Ice Vanila Latte</div>
-                      <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 35%|Milk 45%|Syrup Vanila 20%</div>
-                      <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.30.000 </div>
-                      <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Kopi pembawa cinta dari syahidil, manisnya dari syahidil ke hati kamu dalam bentuk kopi dan kasih sayang.</div>
-                      <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
-                        <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
-                      </div>
+                  <div class="w-[625px] h-full relative rounded-xl">
+                    <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/IceVL.png" />
+                  </div>
+                  <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
+                    <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Ice Vanila Latte</div>
+                    <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 35%|Milk 45%|Syrup Vanila 20%</div>
+                    <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.30.000 </div>
+                    <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Kopi pembawa cinta dari syahidil, manisnya dari syahidil ke hati kamu dalam bentuk kopi dan kasih sayang.</div>
+                    <input type="hidden" th:name="product" th:value="IceVL" />
+                    <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
+                      <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
                     </div>
                   </div>
+                </div>
+              </form>
             </div>
             
             <div th:if="${product == 'IceHL'}" class="w-full h-full justify-center flex duration-700 ease-in-out">
+              <form method="post" th:action="@{/user/addcart}">  
                 <div class="w-5/6 h-full flex-row items-center gap-[119px] inline-flex">
-                    <div class="w-[625px] h-full relative rounded-xl">
-                      <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/IceHL.png" />
-                    </div>
-                    <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
-                      <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Ice Hazelnut Latte</div>
-                      <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 35%|Milk 45%|Syrup Hazelnut 20%</div>
-                      <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.30.000</div>
-                      <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee that create miracle, only for you who been trough a long day. Oh hot or cold days this will still there for you.</div>
-                      <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
-                        <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
-                      </div>
+                  <div class="w-[625px] h-full relative rounded-xl">
+                    <img class="w-[625px] rounded-xl left-0 top-0 absolute" src="../img/IceHL.png" />
+                  </div>
+                  <div class=" relative flex-col justify-center items-start gap-6 inline-flex">
+                    <div class="self-stretch text-black text-[40px] font-semibold font-['Inter'] leading-[44px]">Ice Hazelnut Latte</div>
+                    <div class="self-stretch text-zinc-500 text-2xl font-normal font-['Inter'] leading-9">Coffee 35%|Milk 45%|Syrup Hazelnut 20%</div>
+                    <div class="self-stretch text-black text-2xl font-normal font-['Inter'] leading-9">Rp.30.000</div>
+                    <div class="self-stretch text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px]">Coffee that create miracle, only for you who been trough a long day. Oh hot or cold days this will still there for you.</div>
+                    <input type="hidden" th:name="product" th:value="IceHL" />
+                    <div class="self-stretch px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 inline-flex">
+                      <button class="text-white text-base font-medium font-['Inter'] leading-normal">Add to cart</button>
                     </div>
                   </div>
+                </div>
+              </form>
             </div>
         </div>
 
