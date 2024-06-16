@@ -128,8 +128,17 @@ public class WiraController {
             return new ModelAndView("product").addObject("product", paramNull).addObject("ammount", ammount);
         }
         @RequestMapping("/menu")
-        protected ModelAndView yeet() {
-            return new ModelAndView("menu");
+        protected ModelAndView yeet(@AuthenticationPrincipal User user) {
+            int ammount = 0;
+            if(user != null)
+                if(!stuffRepo.findByUser(user).isEmpty()){
+                    UserStuff uStuff = stuffRepo.findByUser(user).getFirst();
+                    JsonStuff jsonStuff = uStuff.getJsonContent();
+                    for (StuffArray stuff : jsonStuff.getStuffArray()) {
+                        ammount += stuff.getAmount();
+                    }
+                }
+            return new ModelAndView("menu").addObject("ammount", ammount);
         }
     }
     //=====================================================
@@ -242,7 +251,7 @@ public class WiraController {
         @PostMapping("/register")
         protected ModelAndView regisPost(@Valid @ModelAttribute("user") UserSafe userSafe, BindingResult result) {
             
-            if(result.hasErrors()) return (new ModelAndView("redirect:/"));
+            if(result.hasErrors()) return (new ModelAndView("index"));
             if(!userSafe.getPassword().equals(userSafe.getRePassword())) return new ModelAndView("SignUp_Page").addObject("error", "Password and Re-Password doesn't match");
             String randomShit =  String.valueOf(Math.round(Math.random() * (999999 - 111111)) + 111111);
             String WiraGantengSedunia = service.sendOTP(userSafe.getEmail(), randomShit);
@@ -290,6 +299,7 @@ public class WiraController {
                     .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) : null;
             return new ModelAndView("SignIn_Page").addObject("error", (ex != null) ? (ex.getMessage().equals("Bad Credentials") ? "Username atau Password tidak valid" : ex.getMessage()) : null);
         }
+
         @GetMapping("/forbidYou")
         protected ModelAndView forbid(HttpServletRequest request, @AuthenticationPrincipal User user){
             HttpSession session = request.getSession(false);
