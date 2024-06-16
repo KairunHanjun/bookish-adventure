@@ -2,15 +2,11 @@ package org. kelompokwira.wirakopi.wirakopi.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff;
-//import org.apache.commons.codec.digest.DigestUtils;
 import org.kelompokwira.wirakopi.wirakopi.Entity.User;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserAuthorities;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserSafe;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserStuff;
-import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff.DrinkNameEnum;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.JsonStuff;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.StuffArray;
 import org.kelompokwira.wirakopi.wirakopi.Repository.AuthRepo;
