@@ -1,9 +1,7 @@
 package org.kelompokwira.wirakopi.wirakopi.HTMLJava;
 
-import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff;
 import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff.DrinkNameEnum;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 public class HTML {
     public static enum urlImage {

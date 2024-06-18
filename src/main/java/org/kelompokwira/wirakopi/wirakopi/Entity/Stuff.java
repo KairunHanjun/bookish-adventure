@@ -3,8 +3,6 @@ package org.kelompokwira.wirakopi.wirakopi.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.kelompokwira.wirakopi.wirakopi.HTMLJava.HTML.urlImage;
-
 public class Stuff{
     public static enum DrinkNameEnum {
         Americano(25),

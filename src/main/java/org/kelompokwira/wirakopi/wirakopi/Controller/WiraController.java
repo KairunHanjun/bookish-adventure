@@ -9,7 +9,6 @@ import org.kelompokwira.wirakopi.wirakopi.Entity.UserAuthorities;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserSafe;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserStuff;
 import org.kelompokwira.wirakopi.wirakopi.HTMLJava.HTML;
-import org.kelompokwira.wirakopi.wirakopi.HTMLJava.HTML.urlImage;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.JsonStuff;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.StuffArray;
 import org.kelompokwira.wirakopi.wirakopi.Repository.AuthRepo;
@@ -20,7 +19,6 @@ import org.kelompokwira.wirakopi.wirakopi.WirakopiApplication.Something;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +26,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,7 +72,6 @@ public class WiraController {
     private AuthRepo authRepo;
     @Autowired
     private UserStuffRepo stuffRepo;
-    private final int Shipping = 10;
 
     public WiraController(UserService Services){
         this.service = Services;
@@ -274,7 +270,6 @@ public class WiraController {
     @RestControllerAdvice
     @RequestMapping("/error")
     class ErrorControl implements ErrorController{
-        //TODO: FIX THIS, MAYBE SOME WRONG CONFIG BE IN HERE
         @GetMapping
         @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
         @ExceptionHandler(value = Exception.class)
