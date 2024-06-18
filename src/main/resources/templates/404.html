@@ -36,8 +36,12 @@
 
             
             <h2>Page Not Found</h2>
-            <button id="ClickHere">Back to homepage</button>
+            <button th:onclick="|window.location.href='../auth/login'|" id="ClickHere">Back to homepage</button>
         </div>
+
+        <!-- <p th:object="${error}" th:if="${error != 'Nothing'}" th:text="${error}">
+            [[${error}]]
+        </p> -->
         
     </body>
 </html>

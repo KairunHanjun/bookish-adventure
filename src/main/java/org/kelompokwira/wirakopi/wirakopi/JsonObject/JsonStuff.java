@@ -1,5 +1,6 @@
 package org.kelompokwira.wirakopi.wirakopi.JsonObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -9,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JsonStuff {
+public class JsonStuff implements Serializable{
     protected List<StuffArray> stuffArray;
 }

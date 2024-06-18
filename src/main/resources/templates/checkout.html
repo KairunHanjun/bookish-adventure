@@ -62,30 +62,14 @@
                   <div class="w-[755px] h-[379px] overflow-x-scroll flex-col gap-5 flex relative">
                     <div class="w-[631.36px] h-[174.67px] left-[33.25px] top-[74.24px] absolute flex-col justify-start items-start gap-5 inline-flex">
                       
-                        <div class="rounded-[10px] justify-start items-start gap-[294px] inline-flex">
-                          <div class="flex-col justify-start items-start gap-2.5 inline-flex">
-                            <div class="justify-start items-start gap-7 inline-flex">
-                              <img class="w-[99.99px] h-[77.33px] rounded-[10px]" src="https://via.placeholder.com/100x77" />
-                              <div class="w-[118.74px] h-[34.37px] text-neutral-600 text-lg font-semibold font-['Inter'] leading-normal">Americano</div>
-                            </div>
-                            <div class="w-[82.81px] h-[34.37px] left-[128.12px] top-[37.24px] absolute text-zinc-400 text-[13px] font-bold font-['Inter'] leading-normal">Rp15.000</div>
-                          </div>
-                          <div class="flex-col justify-start items-center gap-[17px] inline-flex">
-                            <div class="h-[27.21px] text-neutral-600 text-base font-semibold font-['Inter']">Quantity</div>
-                            <div class="h-auto text-zinc-400 gap-2 items-center flex flex-row text-base font-black font-['Inter']">
-                              <button class="rounded-md hover:bg-green-600 bg-orange-400 text-white w-7">+</button>
-                              <p>1</p>
-                              <button class="rounded-md hover:bg-red-600 bg-orange-400 text-white w-7">-</button>
-                            </div>
-                          </div>
-                        </div>
+                        [(${div})]
                       
                     </div>
                   </div>
                   <div class="w-[755px] h-[85px] pl-[33px] pr-[87px] py-[17px] border-t border-b border-neutral-400 flex-col justify-start items-center gap-[5px] inline-flex">
                     <div class="justify-start items-start gap-[482px] inline-flex">
                       <div class="w-[71px] h-[23px] opacity-80 text-neutral-600 text-sm font-semibold font-['Inter'] leading-normal">Subtotal</div>
-                      <div class="w-[82px] h-[23px] opacity-80 text-neutral-600 text-sm font-normal font-['Inter'] leading-normal">Rp37.000</div>
+                      <div th:object="${totalDrink}" th:text="${totalDrink}" th:if="${totalDrink != null}" class="w-[82px] h-[23px] opacity-80 text-neutral-600 text-sm font-normal font-['Inter'] leading-normal"></div>
                     </div>
                     <div class="justify-start items-start gap-[482px] inline-flex">
                       <div class="w-[71px] h-[23px] opacity-80 text-neutral-600 text-sm font-semibold font-['Inter'] leading-normal">Shipping</div>
@@ -95,7 +79,7 @@
                   <div class="pl-8 py-3 border-b border-zinc-400 flex-col justify-start items-start gap-2.5 flex">
                     <div class="w-[722px] justify-start items-start gap-[481px] inline-flex">
                       <div class="w-[60px] h-[26px] text-neutral-600 text-[22px] font-semibold font-['Inter'] leading-normal">Total</div>
-                      <div class="w-28 h-[26px] text-neutral-600 text-[22px] font-normal font-['Inter'] leading-normal">Rp47.000</div>
+                      <div th:object="${total}" th:text="${total}" th:if="${total != null}" class="w-28 h-[26px] text-neutral-600 text-[22px] font-normal font-['Inter'] leading-normal"></div>
                     </div>
                   </div>
                   <div class="pl-[51px] py-4 justify-start items-end gap-[92px] inline-flex">

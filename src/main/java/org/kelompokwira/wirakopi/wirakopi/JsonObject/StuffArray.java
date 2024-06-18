@@ -1,5 +1,7 @@
 package org.kelompokwira.wirakopi.wirakopi.JsonObject;
 
+import java.io.Serializable;
+
 import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff;
 
 import lombok.AllArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StuffArray {
+public class StuffArray implements Serializable{
     protected String DrinkName = "";
     protected int DrinkPrice = 0;
     protected int Amount = 0;

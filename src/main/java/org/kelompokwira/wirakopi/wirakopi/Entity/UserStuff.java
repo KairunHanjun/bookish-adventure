@@ -1,8 +1,12 @@
 package org.kelompokwira.wirakopi.wirakopi.Entity;
 
+import java.io.Serializable;
+
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.ConvertGson;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.JsonStuff;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -16,22 +20,23 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Data
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Component
+@EqualsAndHashCode(of = "Id")
 @Table(name = "User_Stuff")
-public class UserStuff{
+public class UserStuff implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user", referencedColumnName = "username")
     private User user;
     @Convert(converter = ConvertGson.class)
     @Column(columnDefinition = "JSON")
+    @JsonBackReference
     private JsonStuff jsonContent;
 }

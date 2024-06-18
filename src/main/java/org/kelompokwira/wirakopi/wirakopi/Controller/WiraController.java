@@ -3,10 +3,13 @@ package org. kelompokwira.wirakopi.wirakopi.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff;
 import org.kelompokwira.wirakopi.wirakopi.Entity.User;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserAuthorities;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserSafe;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserStuff;
+import org.kelompokwira.wirakopi.wirakopi.HTMLJava.HTML;
+import org.kelompokwira.wirakopi.wirakopi.HTMLJava.HTML.urlImage;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.JsonStuff;
 import org.kelompokwira.wirakopi.wirakopi.JsonObject.StuffArray;
 import org.kelompokwira.wirakopi.wirakopi.Repository.AuthRepo;
@@ -17,6 +20,7 @@ import org.kelompokwira.wirakopi.wirakopi.WirakopiApplication.Something;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +28,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,14 +47,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-
-//Test
-
-
 @EnableJdbcHttpSession
 @RestController
 public class WiraController {
-
     //============
     //OPEN METHOD
     //============
@@ -75,6 +75,7 @@ public class WiraController {
     private AuthRepo authRepo;
     @Autowired
     private UserStuffRepo stuffRepo;
+    private final int Shipping = 10;
 
     public WiraController(UserService Services){
         this.service = Services;
@@ -274,11 +275,11 @@ public class WiraController {
     @RequestMapping("/error")
     class ErrorControl implements ErrorController{
         //TODO: FIX THIS, MAYBE SOME WRONG CONFIG BE IN HERE
-        @GetMapping("/500")
+        @GetMapping
         @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
         @ExceptionHandler(value = Exception.class)
         protected ModelAndView errorGraveyard(Exception e) {
-            return new ModelAndView("500").addObject("error", (e != null) ? e.getMessage() : "Nothing");  
+            return new ModelAndView("500").addObject("error", (e != null) ?  "Error Message: " + e.getMessage() + "\nError Cause: " + e.getCause(): "Nothing");  
         }
 
         @GetMapping("/404")
@@ -315,6 +316,31 @@ public class WiraController {
     @RestController
     @RequestMapping("/user")
     class UserControl{
+        @GetMapping("/jemBelanda")
+        public ModelAndView jemBelanda(@RequestParam(name = "action", required = false) String param, @AuthenticationPrincipal User user) {
+            String div = "";
+            if(user == null) return new ModelAndView("SignIn_Page").addObject("error", "Please put on some pants");
+            if(!stuffRepo.findByUser(user).isEmpty()){
+                Long totalDrink = 0L;
+                UserStuff uStuff = stuffRepo.findByUser(user).getFirst();
+                JsonStuff jsonStuff = uStuff.getJsonContent();
+                for (StuffArray stuff : jsonStuff.getStuffArray()) {
+                    totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
+                    div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
+                }
+                return new ModelAndView("checkout").addObject("div", div).addObject("totalDrink", totalDrink).addObject("total", totalDrink+10000L);
+            }
+            ModelAndView model = new ModelAndView("redirect:../static/menu");
+            model.addObject("messageError", "error");
+            model.addObject("message", "Please look on our magnificient coffee");
+            return model;
+        }
+        
+        // @PostMapping("/jemBelanda")
+        // public ModelAndView jemBelanda(@RequestParam String param) {
+            
+        // }
+
         @GetMapping("/userProfile")
         public ModelAndView getMethodName() {
             return new ModelAndView("userProfile");

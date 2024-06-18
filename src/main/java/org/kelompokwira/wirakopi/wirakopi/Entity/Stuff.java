@@ -3,6 +3,8 @@ package org.kelompokwira.wirakopi.wirakopi.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.kelompokwira.wirakopi.wirakopi.HTMLJava.HTML.urlImage;
+
 public class Stuff{
     public static enum DrinkNameEnum {
         Americano(25),
@@ -10,7 +12,8 @@ public class Stuff{
         Expresso(20),
         Cappuchino(35),
         IceVL(30),
-        IceHL(30);
+        IceHL(30),
+        Default(0);
 
         private int DrinkPrice;
 
@@ -22,6 +25,32 @@ public class Stuff{
             this.DrinkPrice = DrinkPrice;
         }
     }
+
+    public static DrinkNameEnum getDrinkNameEnum(String drinkName){
+        switch (drinkName) {
+            case "Americano":{
+                return DrinkNameEnum.Americano;
+            }
+            case "Macchiato":{
+                return DrinkNameEnum.Macchiato;
+            }
+            case "Expresso":{
+                return DrinkNameEnum.Expresso;
+            }
+            case "Cappuchino":{
+                return DrinkNameEnum.Cappuchino;
+            }
+            case "IceVL":{
+                return DrinkNameEnum.IceVL;
+            }
+            case "IceHL":{
+                return DrinkNameEnum.IceVL;
+            }
+            default:
+                return DrinkNameEnum.Default;
+        }
+    }
+
     private final static HashMap<String, Integer> DrinkInfo = new HashMap<>(
         Map.of("Americano", 25, "Macchiato", 30, "Expresso", 20,
     "Cappuchino", 35, "IceVL", 30, "IceHL", 30));

@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +21,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 // AUTO GENERATED DO NOT EDIT (EDIT AT YOUR OWN RISK)
 
@@ -41,7 +45,8 @@ public class User implements UserDetails{
     private Long id;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<UserAuthorities> listAuthorities = new ArrayList<>();
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = false)
+    @JsonManagedReference
     private UserStuff userStuff;
     @NotEmpty
     private String name;
