@@ -1,4 +1,4 @@
-# Meki Kuda Laut
+#  SkysCoffee (Spring Boot Demo App)
 ## _Spring boot 6 menggunakan spring security_
 
 [![spring boot](https://i.ibb.co.com/f9dxnVj/d-Txp-Pi9l-Df-thumb.png)](https://spring.io)
