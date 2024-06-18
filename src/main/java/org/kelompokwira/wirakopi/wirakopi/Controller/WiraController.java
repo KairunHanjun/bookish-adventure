@@ -51,14 +51,17 @@ public class WiraController {
     //OPEN METHOD
     //============
 
-    // private void setTokenCSRF(Object request){
-    //     HttpServletRequest httpReq = (HttpServletRequest) request;
-    //     HttpServletResponse httpRes = (HttpServletResponse) response;
-    //     String randomLong = ""+random.nextLong();
-    //     Cookie cookie = new Cookie("csrfToken", randomLong);        
-    //     httpRes.addCookie(cookie);
-    //     next.doFilter(request, response);   
-    // }
+    private StuffArray addItem(StuffArray stuff) {
+        if (stuff == null) return new StuffArray();
+        stuff.setAmount(stuff.getAmount()+1);
+        return stuff; 
+    }
+
+    private StuffArray subItem(StuffArray stuff) {
+        if (stuff == null) return new StuffArray();
+        stuff.setAmount(stuff.getAmount()-1);
+        return stuff; 
+    }
 
     //================
     //END OPEN METHOD
@@ -319,9 +322,35 @@ public class WiraController {
                 Long totalDrink = 0L;
                 UserStuff uStuff = stuffRepo.findByUser(user).getFirst();
                 JsonStuff jsonStuff = uStuff.getJsonContent();
+                //Sorry for this
+                int index = 0;
                 for (StuffArray stuff : jsonStuff.getStuffArray()) {
-                    totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
-                    div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
+                    if(param != null){
+                        String drinkname = param.substring(param.indexOf("_")+1);
+                        boolean shouldEdit = true;
+                        if(stuff.getDrinkName() == drinkname){
+                            if(param.contains("add"))
+                                stuff = addItem(stuff);
+                            else if(param.contains("sub"))
+                                stuff = subItem(stuff);
+                            else
+                                shouldEdit = false;
+                                
+                            if(shouldEdit){
+                                jsonStuff.getStuffArray().set(index, stuff);
+                                uStuff.setJsonContent(jsonStuff);
+                                stuffRepo.save(uStuff);
+                                totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
+                                div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
+                            }
+                        }else{
+                            totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
+                            div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
+                        }
+                    }else{
+                        totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
+                        div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
+                    }
                 }
                 return new ModelAndView("checkout").addObject("div", div).addObject("totalDrink", totalDrink).addObject("total", totalDrink+10000L);
             }
@@ -330,11 +359,6 @@ public class WiraController {
             model.addObject("message", "Please look on our magnificient coffee");
             return model;
         }
-        
-        // @PostMapping("/jemBelanda")
-        // public ModelAndView jemBelanda(@RequestParam String param) {
-            
-        // }
 
         @GetMapping("/userProfile")
         public ModelAndView getMethodName() {
