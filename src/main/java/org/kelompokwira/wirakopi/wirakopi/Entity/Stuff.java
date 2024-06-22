@@ -5,22 +5,32 @@ import java.util.Map;
 
 public class Stuff{
     public static enum DrinkNameEnum {
-        Americano(25),
-        Macchiato(30),
-        Expresso(20),
-        Cappuchino(35),
-        IceVL(30),
-        IceHL(30),
-        Default(0);
+        Americano(25, "Americano"),
+        Macchiato(30, "Macchiato"),
+        Expresso(20, "Expresso"),
+        Cappuccino(35, "Cappuccino"),
+        IceVL(30, "Ice Vanila Latte"),
+        IceHL(30, "Ice Hazelnut Latte"),
+        Default(0, "");
 
-        private int DrinkPrice;
+        private int DrinkPrice = 0;
+        private String DrinkCustomName = "";
 
-        public int getDrinkPrice(){
+        public final int getDrinkPrice(){
             return DrinkPrice;
+        }
+
+        public final String nama(){
+            return DrinkCustomName;
         }
 
         DrinkNameEnum(int DrinkPrice) {
             this.DrinkPrice = DrinkPrice;
+        }
+
+        DrinkNameEnum(int i, String string) {
+            this.DrinkPrice = i;
+            this.DrinkCustomName = string; 
         }
     }
 
@@ -35,14 +45,14 @@ public class Stuff{
             case "Expresso":{
                 return DrinkNameEnum.Expresso;
             }
-            case "Cappuchino":{
-                return DrinkNameEnum.Cappuchino;
+            case "Cappuccino":{
+                return DrinkNameEnum.Cappuccino;
             }
             case "IceVL":{
                 return DrinkNameEnum.IceVL;
             }
             case "IceHL":{
-                return DrinkNameEnum.IceVL;
+                return DrinkNameEnum.IceHL;
             }
             default:
                 return DrinkNameEnum.Default;
@@ -51,7 +61,7 @@ public class Stuff{
 
     private final static HashMap<String, Integer> DrinkInfo = new HashMap<>(
         Map.of("Americano", 25, "Macchiato", 30, "Expresso", 20,
-    "Cappuchino", 35, "IceVL", 30, "IceHL", 30));
+    "Cappuccino", 35, "IceVL", 30, "IceHL", 30));
 
     public static class DrinkInfoV2{
         private String DrinkName = "";

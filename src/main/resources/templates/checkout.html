@@ -10,50 +10,42 @@
         <div class="flex-col justify-start items-center gap-[67px] flex">
             <div class="w-screen h-[83px] relative flex flex-row-reverse bg-orange-200">
                 <div class="right-4 relative justify-end items-center gap-12 inline-flex">
-                    <button><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Home</div></button>
-                    <button><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Menu</div></button>
-                    <button><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">About Us </div></button>
-                  <div class="px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">
-                    <button class="text-white text-base font-medium font-['Inter'] leading-normal">Login</button>
-                  </div>
+                    <button th:onclick="|window.location.href='../'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Home</div></button>
+                    <button th:onclick="|window.location.href='../static/menu'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">Menu</div></button>
+                    <button th:onclick="|window.location.href='../static/about.html'|"><div class="text-black hover:underline hover:font-bold text-xl font-medium font-['Inter'] leading-[30px]">About Us </div></button>
+                    <div sec:authorize="!isAuthenticated()">
+                      <a href="../auth/login"><button type="button" class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Login</button></a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                      <a href="../logout"> <button class="w-[100px] h-12 left-0 top-0 bg-orange-300 rounded-3xl shadow text-stone-900 text-sm font-medium font-Playfair">Logout</button> </a>
+                    </div>
                 </div>
                 <img class="w-[106px] h-[61px] left-[12px] top-[10px] absolute rounded-lg" src="../img/tytyd_imut.png" />
             </div>
 
           <div class="justify-start items-center gap-16 inline-flex">
 
-            <form action="">
-              <div class=" flex-col justify-start items-start gap-[17px] inline-flex">
-                <div class="flex-col justify-start items-center gap-3.5 flex">
-                  <div class="text-neutral-600 text-5xl font-semibold font-['Inter'] leading-[48px]">Checkout</div>
-                  <div class="text-neutral-600 text-2xl font-semibold font-['Inter'] leading-7">Contact Information</div>
-                  <div class="flex-col justify-start items-start gap-2 flex">
-                    <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">First Name</div>
-                    <input required placeholder="First name" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+            <div class="justify-start flex-col items-start  gap-16 inline-flex">
+              <form action="">
+                <div class=" flex-col justify-start items-start gap-[17px] inline-flex">
+                  <div class="flex-col justify-start items-center gap-3.5 flex">
+                    <div class="text-neutral-600 text-5xl font-semibold font-['Inter'] leading-[48px]">Checkout</div>
+                    <div class="text-neutral-600 text-2xl font-semibold font-['Inter'] leading-7">Customer Details</div>
+                    <div class="flex-col justify-start items-start gap-2 flex">
+                      <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">Simon Hamour</div>
+                      <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">082122134512</div>
+                      <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">Address</div>
+                      <input required placeholder="Address" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
+                    </div>
+                    <div class="w-[400px] flex relative">
+                      <div class="w-[400px] h-10 left-0 top-0 relative "></div>
+                      <button class="left-0 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-amber-600 duration-300 bg-black rounded-lg min-w-full text-center absolute text-white text-base font-medium font-['Inter'] leading-normal">Checkout Here</button>
                   </div>
-                  <div class="flex-col justify-start items-start gap-2 flex">
-                    <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">Last Name</div>
-                    <input required readonly placeholder="Last Name" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
                   </div>
-                  <div class="flex-col justify-start items-start gap-2 flex">
-                    <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">Email Address</div>
-                    <input required readonly placeholder="Email Address" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
-                  </div>
-                  <div class="flex-col justify-start items-start gap-2 flex">
-                    <div class="opacity-60 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">Phone Number</div>
-                    <input required readonly placeholder="Phone Number" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
-                  </div>
-                  <div class="flex-col justify-start items-start gap-2 flex">
-                    <div class="opacity-80 text-neutral-600 text-base font-normal font-['Inter'] leading-tight">Address</div>
-                    <input required placeholder="Address" class="w-[400px] h-10 px-4 py-2 grow shrink basis-0 text-zinc-500 text-xl font-medium font-['Inter'] leading-[30px] bg-white rounded-lg border border-neutral-200 justify-start items-center gap-4 inline-flex" />
-                  </div>
-                  <div class="w-[400px] flex relative">
-                    <div class="w-[400px] h-10 left-0 top-0 relative "></div>
-                    <button class="left-0 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-amber-600 duration-300 bg-black rounded-lg min-w-full text-center absolute text-white text-base font-medium font-['Inter'] leading-normal">Checkout Here</button>
                 </div>
-                </div>
-              </div>
-            </form>
+              </form>
+
+                <!-- snap midtrans here -->
 
             <div class="w-[802px] h-[717px] relative">
               <div class="px-[23px] py-2.5 left-0 top-0 absolute rounded-[35px] border border-orange-300 flex-col justify-start items-start inline-flex">
@@ -62,24 +54,24 @@
                   <div class="w-[755px] h-[379px] overflow-x-scroll flex-col gap-5 flex relative">
                     <div class="w-[631.36px] h-[174.67px] left-[33.25px] top-[74.24px] absolute flex-col justify-start items-start gap-5 inline-flex">
                       
-                        [(${div})]
-                      
+[(${div})]
+                        
                     </div>
                   </div>
                   <div class="w-[755px] h-[85px] pl-[33px] pr-[87px] py-[17px] border-t border-b border-neutral-400 flex-col justify-start items-center gap-[5px] inline-flex">
                     <div class="justify-start items-start gap-[482px] inline-flex">
                       <div class="w-[71px] h-[23px] opacity-80 text-neutral-600 text-sm font-semibold font-['Inter'] leading-normal">Subtotal</div>
-                      <div th:object="${totalDrink}" th:text="${totalDrink}" th:if="${totalDrink != null}" class="w-[82px] h-[23px] opacity-80 text-neutral-600 text-sm font-normal font-['Inter'] leading-normal"></div>
+                      <div th:object="${totalDrink}" th:text="${totalDrink}" th:if="${totalDrink != null}" class="w-[82px] h-[23px] text-nowrap opacity-80 text-neutral-600 text-sm font-normal font-['Inter'] leading-normal"></div>
                     </div>
                     <div class="justify-start items-start gap-[482px] inline-flex">
                       <div class="w-[71px] h-[23px] opacity-80 text-neutral-600 text-sm font-semibold font-['Inter'] leading-normal">Shipping</div>
-                      <div class="w-[82px] h-[23px] opacity-80 text-neutral-600 text-sm font-normal font-['Inter'] leading-normal">Rp10.000</div>
+                      <div class="w-[82px] h-[23px] opacity-80 text-neutral-600 text-sm font-normal font-['Inter'] leading-normal">Rp 10.000</div>
                     </div>
                   </div>
                   <div class="pl-8 py-3 border-b border-zinc-400 flex-col justify-start items-start gap-2.5 flex">
                     <div class="w-[722px] justify-start items-start gap-[481px] inline-flex">
                       <div class="w-[60px] h-[26px] text-neutral-600 text-[22px] font-semibold font-['Inter'] leading-normal">Total</div>
-                      <div th:object="${total}" th:text="${total}" th:if="${total != null}" class="w-28 h-[26px] text-neutral-600 text-[22px] font-normal font-['Inter'] leading-normal"></div>
+                      <div th:object="${total}" th:text="${total}" th:if="${total != null}" class="w-28 h-[26px] text-nowrap text-neutral-600 text-[22px] font-normal font-['Inter'] leading-normal"></div>
                     </div>
                   </div>
                   <div class="pl-[51px] py-4 justify-start items-end gap-[92px] inline-flex">
@@ -87,7 +79,6 @@
                       <div class="w-[165px] bg-orange-300 rounded-[22px] shadow justify-center items-center gap-2.5 inline-flex">
                         <button class="text-center hover:underline text-black text-base font-extrabold font-['JetBrains Mono'] leading-[38px]">Get your struck </button>
                       </div>
-                      <div class="w-[165px] h-2 text-black text-[8px] font-normal font-['Actor']">*if you already payed</div>
                     </div>
                   </div>
                 </div>

@@ -6,17 +6,13 @@
     <link rel="stylesheet" href="../css/output.css">
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
-    <script th:inline="javascript">
-      /*<![CDATA[*/
-          if (/*[[${messageError}]]*/ 'null' == 'error') {
+    <script>
             iziToast.show({
                     title: 'Fail',
-                    message: /*[[${message}]]*/ 'What?',
+                    message: 'Please look on our magnificient coffee',
                     position: 'topRight',
                     color: 'red'
-            }); 
-          }
-      /*]]>*/
+            });  
   </script>
 </head>
 <body>

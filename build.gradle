@@ -24,11 +24,12 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.midtrans:java-library:3.1.4'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
 	implementation 'org.springframework.session:spring-session-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test-mvc'
+	// testImplementation 'org.springframework.boot:spring-boot-starter-test-mvc'
 	//testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'commons-validator:commons-validator:1.8.0'
 	implementation 'commons-codec:commons-codec:1.17.0'

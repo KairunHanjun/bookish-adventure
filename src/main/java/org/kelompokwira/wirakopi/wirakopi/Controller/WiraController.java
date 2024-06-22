@@ -273,6 +273,7 @@ public class WiraController {
     @RestControllerAdvice
     @RequestMapping("/error")
     class ErrorControl implements ErrorController{
+        //Bug in here /error    
         @GetMapping
         @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
         @ExceptionHandler(value = Exception.class)
@@ -319,45 +320,32 @@ public class WiraController {
             String div = "";
             if(user == null) return new ModelAndView("SignIn_Page").addObject("error", "Please put on some pants");
             if(!stuffRepo.findByUser(user).isEmpty()){
-                Long totalDrink = 0L;
+                long totalDrink = 0L;
                 UserStuff uStuff = stuffRepo.findByUser(user).getFirst();
-                JsonStuff jsonStuff = uStuff.getJsonContent();
-                //Sorry for this
-                int index = 0;
-                for (StuffArray stuff : jsonStuff.getStuffArray()) {
+                if(uStuff.getJsonContent().getStuffArray().isEmpty()) return new ModelAndView("redirect:../static/menu").addObject("error", "UdinSedunia");
+                String drinkname = param==null ? "" : param.substring(param.indexOf("_")+1);
+                for (StuffArray stuff : uStuff.getJsonContent().getStuffArray()) {
                     if(param != null){
-                        String drinkname = param.substring(param.indexOf("_")+1);
-                        boolean shouldEdit = true;
-                        if(stuff.getDrinkName() == drinkname){
+                        if(stuff.getDrinkName().equals(drinkname))
                             if(param.contains("add"))
                                 stuff = addItem(stuff);
                             else if(param.contains("sub"))
                                 stuff = subItem(stuff);
-                            else
-                                shouldEdit = false;
-                                
-                            if(shouldEdit){
-                                jsonStuff.getStuffArray().set(index, stuff);
-                                uStuff.setJsonContent(jsonStuff);
-                                stuffRepo.save(uStuff);
-                                totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
-                                div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
-                            }
-                        }else{
-                            totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
-                            div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
-                        }
-                    }else{
-                        totalDrink += (stuff.getAmount() + Stuff.getDrinkNameEnum(stuff.getDrinkName()).getDrinkPrice()) * 1000;
+                    }
+                    if(stuff.getAmount() != 0){
+                        totalDrink += stuff.getAmount()*stuff.getDrinkPrice()*1000L;
                         div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
                     }
                 }
-                return new ModelAndView("checkout").addObject("div", div).addObject("totalDrink", totalDrink).addObject("total", totalDrink+10000L);
+                JsonStuff jSon = uStuff.getJsonContent();
+                if(jSon.getStuffArray().removeIf(stuff -> (stuff.getAmount() == 0))){
+                    uStuff.setJsonContent(jSon);
+                    uStuff.setUser(user);
+                    stuffRepo.save(uStuff);
+                }
+                return new ModelAndView("checkout").addObject("div", div).addObject("totalDrink", HTML.formatRupiah(totalDrink)).addObject("total", HTML.formatRupiah(totalDrink+10000L));
             }
-            ModelAndView model = new ModelAndView("redirect:../static/menu");
-            model.addObject("messageError", "error");
-            model.addObject("message", "Please look on our magnificient coffee");
-            return model;
+            return new ModelAndView("redirect:../static/menu").addObject("messageError", "error").addObject("message", "Please look on our magnificient coffee");
         }
 
         @GetMapping("/userProfile")
@@ -399,7 +387,7 @@ public class WiraController {
             return new ModelAndView("redirect:../static/product").addObject("product", product);
         }
     }
-    //USER CAN DO NOTHING BECAUSE IM LAZY AF - KONTROL UNTUK USER/PENGGUNA SELESAI
+    //USER CAN DO NOTHING BECAUSE IM LAZY - KONTROL UNTUK USER/PENGGUNA SELESAI
 
 //===============================================================================================
 //                   AKHIR DARI KONTROL PAGE - END OF THE HEADACHE THANK YOU
