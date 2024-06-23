@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 05:24 AM
+-- Generation Time: Jun 23, 2024 at 04:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,8 +72,22 @@ CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
   `otp` bigint(20) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `no_telp` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_stuff`
+--
+
+CREATE TABLE `user_stuff` (
+  `id` bigint(20) NOT NULL,
+  `json_content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_content`)),
+  `user` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -110,6 +124,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `UKr43af9ap4edm43mmtq01oddj6` (`username`);
 
 --
+-- Indexes for table `user_stuff`
+--
+ALTER TABLE `user_stuff`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UKew9f941h3ukg9yvex525619vq` (`user`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -117,13 +138,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `authorities`
 --
 ALTER TABLE `authorities`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user_stuff`
+--
+ALTER TABLE `user_stuff`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -140,6 +167,12 @@ ALTER TABLE `authorities`
 --
 ALTER TABLE `spring_session_attributes`
   ADD CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `spring_session` (`PRIMARY_ID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_stuff`
+--
+ALTER TABLE `user_stuff`
+  ADD CONSTRAINT `FKdpmj4vecdo6bvdrcvf60o057j` FOREIGN KEY (`user`) REFERENCES `users` (`username`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
