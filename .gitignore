@@ -38,3 +38,4 @@ out/
 .vscode/
 src/main/resources/application.properties
 
+src/main/java/org/kelompokwira/wirakopi/wirakopi/Secret/Secret.java
