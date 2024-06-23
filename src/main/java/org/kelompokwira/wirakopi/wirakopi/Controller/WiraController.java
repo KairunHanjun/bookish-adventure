@@ -1,8 +1,13 @@
 package org. kelompokwira.wirakopi.wirakopi.Controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.kelompokwira.wirakopi.wirakopi.Configuration.PaymentConfig;
 import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff;
 import org.kelompokwira.wirakopi.wirakopi.Entity.User;
 import org.kelompokwira.wirakopi.wirakopi.Entity.UserAuthorities;
@@ -14,7 +19,9 @@ import org.kelompokwira.wirakopi.wirakopi.JsonObject.StuffArray;
 import org.kelompokwira.wirakopi.wirakopi.Repository.AuthRepo;
 import org.kelompokwira.wirakopi.wirakopi.Repository.UserStuffRepo;
 import org.kelompokwira.wirakopi.wirakopi.Repository.WiraRepo;
+import org.kelompokwira.wirakopi.wirakopi.Secret.Secret;
 import org.kelompokwira.wirakopi.wirakopi.Service.UserService;
+import org.kelompokwira.wirakopi.wirakopi.StaticMethod.StaticMethod;
 import org.kelompokwira.wirakopi.wirakopi.WirakopiApplication.Something;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -33,6 +40,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.midtrans.Config;
+import com.midtrans.ConfigBuilder;
+import com.midtrans.ConfigFactory;
+import com.midtrans.Midtrans;
+import com.midtrans.httpclient.SnapApi;
+import com.midtrans.httpclient.error.MidtransError;
+import com.midtrans.service.MidtransSnapApi;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -44,6 +59,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+
 @EnableJdbcHttpSession
 @RestController
 public class WiraController {
@@ -51,17 +67,7 @@ public class WiraController {
     //OPEN METHOD
     //============
 
-    private StuffArray addItem(StuffArray stuff) {
-        if (stuff == null) return new StuffArray();
-        stuff.setAmount(stuff.getAmount()+1);
-        return stuff; 
-    }
-
-    private StuffArray subItem(StuffArray stuff) {
-        if (stuff == null) return new StuffArray();
-        stuff.setAmount(stuff.getAmount()-1);
-        return stuff; 
-    }
+    
 
     //================
     //END OPEN METHOD
@@ -121,7 +127,7 @@ public class WiraController {
                 }
             
             String paramNull = param == null ? "" : param;
-            return new ModelAndView("product").addObject("product", paramNull).addObject("ammount", ammount);
+            return new ModelAndView("product").addObject("product", paramNull).addObject("ammount", ammount == 0 ? ammount : ammount-1);
         }
         @RequestMapping("/menu")
         protected ModelAndView yeet(@AuthenticationPrincipal User user) {
@@ -134,7 +140,7 @@ public class WiraController {
                         ammount += stuff.getAmount();
                     }
                 }
-            return new ModelAndView("menu").addObject("ammount", ammount);
+            return new ModelAndView("menu").addObject("ammount", ammount == 0 ? ammount : ammount-1);
         }
     }
     //=====================================================
@@ -316,24 +322,22 @@ public class WiraController {
     @RequestMapping("/user")
     class UserControl{
         @GetMapping("/jemBelanda")
-        public ModelAndView jemBelanda(@RequestParam(name = "action", required = false) String param, @AuthenticationPrincipal User user) {
+        public ModelAndView jemBelanda(@RequestParam(name = "action", required = false) String param, @RequestParam(name = "address", required = false) String address, @AuthenticationPrincipal User user) {
             String div = "";
             if(user == null) return new ModelAndView("SignIn_Page").addObject("error", "Please put on some pants");
             if(!stuffRepo.findByUser(user).isEmpty()){
                 long totalDrink = 0L;
                 UserStuff uStuff = stuffRepo.findByUser(user).getFirst();
-                if(uStuff.getJsonContent().getStuffArray().isEmpty()) return new ModelAndView("redirect:../static/menu").addObject("error", "UdinSedunia");
+                if(uStuff.getJsonContent().getStuffArray().size() <= 1) return new ModelAndView("redirect:../static/menu").addObject("error", "UdinSedunia");
                 String drinkname = param==null ? "" : param.substring(param.indexOf("_")+1);
                 for (StuffArray stuff : uStuff.getJsonContent().getStuffArray()) {
-                    if(param != null){
-                        if(stuff.getDrinkName().equals(drinkname))
-                            if(param.contains("add"))
-                                stuff = addItem(stuff);
-                            else if(param.contains("sub"))
-                                stuff = subItem(stuff);
-                    }
-                    if(stuff.getAmount() != 0){
-                        totalDrink += stuff.getAmount()*stuff.getDrinkPrice()*1000L;
+                    if(param != null && !param.equals("buy") && stuff.getDrinkName().equals(drinkname))
+                        if(param.contains("add"))
+                            stuff = StaticMethod.addItem(stuff);
+                        else if(param.contains("sub"))
+                            stuff = StaticMethod.subItem(stuff);
+                    if(stuff.getAmount() != 0 && !stuff.getDrinkName().equals("Shipping Cost")){
+                        totalDrink += stuff.getAmount()*stuff.getDrinkPrice();
                         div += HTML.divItemsBuilder(HTML.getImage(stuff.getDrinkName()), Stuff.getDrinkNameEnum(stuff.getDrinkName()), stuff.getAmount());
                     }
                 }
@@ -343,7 +347,39 @@ public class WiraController {
                     uStuff.setUser(user);
                     stuffRepo.save(uStuff);
                 }
-                return new ModelAndView("checkout").addObject("div", div).addObject("totalDrink", HTML.formatRupiah(totalDrink)).addObject("total", HTML.formatRupiah(totalDrink+10000L));
+                if(param != null && param.equals("buy")){
+                    System.out.println("Total JsonStuff Gross Amount: " + jSon.getGrossAmount()
+                                    +  "Total from totalDrink Variable: " + totalDrink);
+
+                    Midtrans.clientKey = Secret.MID_CLIENT_KEY.getSecret();
+                    Midtrans.serverKey = Secret.MID_SERVER_KEY.getSecret();
+                    // Get ClientKey from Midtrans Configuration class
+                    MidtransSnapApi snapApi = StaticMethod.snapApi(Midtrans.getClientKey(), Midtrans.getServerKey(), false);
+
+                    Map<String, String> transDetail = new HashMap<>();
+                    transDetail.put("order_id", "MID_JAVA_DEMO_" + StaticMethod.generateRandomChars(StaticMethod.candidateChars, 17));
+                    transDetail.put("gross_amount", String.valueOf(totalDrink+10000));
+
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("transaction_details", transDetail);
+                    data.put("item_details", jSon.MappingStuffArray());
+                    data.put("customer_details", StaticMethod.CreateMappingUser(user, address));
+                    data.put("payment_type", "gopay");
+                    data.put("enabled_payments", List.of(PaymentConfig.QRIS_ONLY));
+                    
+                    try {
+                        return new ModelAndView("checkout")
+                            .addObject("div", div)
+                            .addObject("totalDrink", HTML.formatRupiah(totalDrink))
+                            .addObject("total", HTML.formatRupiah(totalDrink+10000L))
+                            .addObject("clientKey", Secret.MID_CLIENT_KEY.getSecret())
+                            .addObject("transactionToken", snapApi.createTransactionToken(data))
+                            .addObject("user", new UserSafe(user, false))
+                            .addObject("address", address);
+                    } catch (MidtransError e) {e.printStackTrace();}
+                }
+                
+                return new ModelAndView("checkout").addObject("div", div).addObject("totalDrink", HTML.formatRupiah(totalDrink)).addObject("total", HTML.formatRupiah(totalDrink+10000L)).addObject("user", new UserSafe(user, false)).addObject("clientKey", Secret.MID_CLIENT_KEY.getSecret()).addObject("transactionToken", null).addObject("address", address);
             }
             return new ModelAndView("redirect:../static/menu").addObject("messageError", "error").addObject("message", "Please look on our magnificient coffee");
         }
@@ -381,6 +417,8 @@ public class WiraController {
                 stuffArrays.add(aStuff);
                 jStuff.setStuffArray(stuffArrays);
             }
+            //Adding Shipping Cost
+            jStuff.addShippingCost();
             stuff.setJsonContent(jStuff);
             stuff.setUser(user);
             stuffRepo.save(stuff);
