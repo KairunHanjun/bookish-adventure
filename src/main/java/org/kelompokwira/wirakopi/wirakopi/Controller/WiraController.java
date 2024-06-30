@@ -1,11 +1,9 @@
 package org. kelompokwira.wirakopi.wirakopi.Controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.kelompokwira.wirakopi.wirakopi.Configuration.PaymentConfig;
 import org.kelompokwira.wirakopi.wirakopi.Entity.Stuff;
@@ -40,11 +38,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.midtrans.Config;
-import com.midtrans.ConfigBuilder;
-import com.midtrans.ConfigFactory;
 import com.midtrans.Midtrans;
-import com.midtrans.httpclient.SnapApi;
 import com.midtrans.httpclient.error.MidtransError;
 import com.midtrans.service.MidtransSnapApi;
 
@@ -63,15 +57,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @EnableJdbcHttpSession
 @RestController
 public class WiraController {
-    //============
-    //OPEN METHOD
-    //============
-
-    
-
-    //================
-    //END OPEN METHOD
-    //================
     private UserService service;
     @Autowired
     private WiraRepo userRepo;

@@ -23,7 +23,7 @@
           </button>
           <button th:onclick="|window.location.href='../'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">Home</div></button>
           <button th:onclick="|window.location.href='../static/menu'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">Menu</div></button>
-          <button th:onclick="|window.location.href='../static/about'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">About Us </div></button>
+          <button th:onclick="|window.location.href='../static/about.html'|" class="bg-transparent"><div class="text-black text-xl hover:underline hover:font-bold font-medium font-['Inter'] leading-[30px]">About Us </div></button>
           <div sec:authorize="!isAuthenticated()">
             <a href="../auth/login"><button class="text-orange-50 text-base hover:underline font-medium font-['Inter'] leading-normal px-6 py-3.5 bg-black rounded-lg shadow justify-center items-center gap-2 flex">Login</button></a>
           </div>
@@ -266,31 +266,34 @@
                 <div class="text-black relative left-10 text-2xl font-normal font-['Inter'] leading-9">www.skyscoffee.com</div>
                 <div class="relative left-8 justify-start items-start gap-2 inline-flex">
                     <div class="w-10 h-10 relative rounded">
-                        <button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
+                      <a href="https://www.facebook.com/profile.php?idb=61560516392315&mibextid=ZbWKwL"><button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
                         <img class="w-5 h-[19.92px] left-[2px] top-[2.04px] absolute" src="../img/Icon.png" />
-                        </button>
+                      </button></a>
                     </div>
                     <div class="w-10 h-10 relative rounded">
-                        <button class="w-6 h-6 bg-black rounded-xl left-[8px] top-[8px] absolute">
-                        <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="../img/Icon (2).png" />
-                        </button>
+                        <a href="https://www.linkedin.com/in/sky-s-coffee-879688311/"><button class="w-6 h-6 bg-black rounded-xl left-[8px] top-[8px] absolute">
+                            <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="../img/Icon (2).png" />
+                        </button></a>
                     </div>
                     <div class="w-10 h-10 relative rounded">
-                        <button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
-                        <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="../img/Icon (3).png" />
-                        </button>
+                        <a href="https://www.instagram.com/skyscoffee24?igsh=MWQ4NmcxcHhsM2FkYg=="><button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
+                            <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="../img/Icon (3).png" />
+                        </button></a>
                     </div>
                 </div>
             </div>
             <div class="w-screen flex relative m-auto justify-end space-x-28 flex-row right-20 end-0">
-                <div class="w-[102px] h-[216px] left-0 top-0 relative">
-                    <div class="left-0 top-0 absolute text-orange-400 text-[26px] font-bold font-Playfair">About</div>
-                    <div class="left-0 top-[40px] absolute text-orange-400 text-lg font-normal font-Playfair leading-[42px]">Menu<br/>Social Media<br/>About Us</div>
-                </div>
-                <div class="w-[134px] h-[174px] left-0 top-0 relative">
-                    <div class="left-0 top-0 absolute text-orange-400 text-[26px] font-bold font-Playfair">Company</div>
-                    <div class="left-0 top-[40px] absolute text-orange-400 text-lg font-normal font-Playfair leading-[42px]">Terms of service<br/>FAQ</div>
-                </div>
+              <div class="w-[102px] h-[216px] left-0 top-0 gap-10 relative flex-col">
+                <div class="left-0 top-0 relative text-orange-400 text-[26px] font-bold font-Playfair">About</div>
+                <a href="/static/menu"><div class="hover:underline left-0 relative text-orange-400 text-lg font-normal font-Playfair">Menu</div></a>
+                <a href="/static/about.html"><div class="hover:underline left-0 relative text-orange-400 text-lg font-normal font-Playfair">About Us</div></a>
+              </div>
+              <div class="w-[102px] h-[216px] left-0 top-0 relative flex-col">
+                <div class="left-0 top-0 relative text-orange-400 text-[26px] font-bold font-Playfair">Company</div>
+                <a href="/static/FAQ.html"><div class="hover:underline left-0 top-0 relative text-orange-400 text-lg font-normal font-Playfair">FAQ</div></a>
+                <a href="/static/Privacy.html"><div class="hover:underline left-0 top-0 relative text-orange-400 text-lg whitespace-nowrap font-normal font-Playfair">Privacy Policy</div></a>
+                <a href="/static/TOS.html"><div class="hover:underline left-0 top-0 relative text-orange-400 text-lg whitespace-nowrap font-normal font-Playfair">Term Of Services</div></a>
+              </div>
                 <div class="w-[332px] h-[258px] left-0 top-0 relative">
                     <div class="left-0 top-0 absolute text-orange-400 text-[26px] font-bold font-Playfair">Contact Us</div>
                     <div class="w-[332px] h-48 left-0 top-[48.5px] absolute">
