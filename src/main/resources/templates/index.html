@@ -11,7 +11,9 @@
           }
           
           window.addEventListener("scroll", scrollEventHandler, false)
-        </script> 
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     </head>
     <body>
       <div id="main" class="flex flex-col w-screen h-full justify-between relative bg-white">
@@ -226,14 +228,16 @@
               <div class="left-[92px] top-0 absolute text-white text-[54px] font-bold font-Playfair">Subscribe to get the Latest News</div>
               <div class="w-[980px] left-0 top-[88px] absolute text-center text-white text-xl font-normal font-Playfair leading-[34px]">Don’t miss out on our latest news, updates, tips and special offers</div>
             </div>
-            <div class="w-[642px] h-[100px] left-0 top-0 relative">
-              <div class="w-[642px] h-[66px] left-0 top-[7px] absolute bg-orange-50 rounded border border-orange-300/opacity-40"></div>
-              <div class="w-[137px] h-[100px] left-[505px] top-0 absolute">
-                <div class="w-[137px] h-[66px] left-0 top-[7px] absolute bg-orange-300 rounded shadow"></div>
-                <div class="left-[24px] top-[26px] absolute text-yellow-900 text-[22px] font-bold font-Playfair">Subscribe</div>
+            <form action="" th:action="@{/}" method="get">
+              <div class="w-[642px] h-[100px] left-0 top-0 flex flex-row relative">
+                <input type="email" name="email" placeholder="Input your email" class="z-50 w-[505px] h-[66px] relative flex whitespace-nowrap text-black/opacity-30 text-xl font-normal font-Playfair leading-[34px] bg-orange-50 rounded border border-orange-300/opacity-40"/>
+                <button type="submit" class="z-50 h-[66px] relative flex">
+                  <div class="w-[137px] h-[66px] justify-center items-center relative flex left-0 top-0 bg-orange-300 rounded shadow">
+                    <div class="relative flex whitespace-nowrap text-center text-black/opacity-30 text-xl font-normal font-Playfair leading-[34px]">Subscribe</div>
+                  </div>
+                </button>
               </div>
-              <div class="left-[26px] top-[23px] absolute text-center text-black/opacity-30 text-xl font-normal font-Playfair leading-[34px]">Enter your mail</div>
-            </div>
+            </form>
           </div>
         </div>
           <div id="Footer-Content-Second" class="flex flex-row w-screen relative">
@@ -249,31 +253,34 @@
                 </div>
                 <div class="left-0 top-10 relative justify-start items-start gap-2 inline-flex">
                   <div class="w-10 h-10 relative rounded">
-                    <div class="w-6 h-6 left-[8px] top-[8px] absolute">
-                      <img class="w-5 h-[19.92px] left-[2px] top-[2.04px] absolute" src="/img/Icon.png" />
-                    </div>
-                  </div>
-                  <div class="w-10 h-10 relative rounded">
-                    <div class="w-6 h-6 left-[8px] top-[8px] absolute">
-                      <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="/img/Icon (2).png" />
-                    </div>
-                  </div>
-                  <div class="w-10 h-10 relative rounded">
-                    <div class="w-6 h-6 left-[8px] top-[8px] absolute">
-                      <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="/img/Icon (3).png" />
-                    </div>
-                  </div>
+                    <a href="https://www.facebook.com/profile.php?idb=61560516392315&mibextid=ZbWKwL"><button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
+                      <img class="w-5 h-[19.92px] left-[2px] top-[2.04px] absolute" src="../img/Icon.png" />
+                    </button></a>
+                </div>
+                <div class="w-10 h-10 relative rounded">
+                    <a href="https://www.linkedin.com/in/sky-s-coffee-879688311/"><button class="w-6 h-6 bg-black rounded-xl left-[8px] top-[8px] absolute">
+                      <img class="w-[18px] h-[18px] left-[3px] top-[3px] absolute" src="../img/Icon (2).png" />
+                    </button></a>
+                </div>
+                <div class="w-10 h-10 relative rounded">
+                    <a href="https://www.instagram.com/skyscoffee24?igsh=MWQ4NmcxcHhsM2FkYg=="><button class="w-6 h-6 left-[8px] bg-black rounded-xl top-[8px] absolute">
+                        <img class="w-5 h-5 left-[2px] top-[2px] absolute" src="../img/Icon (3).png" />
+                    </button></a>
+                </div>
                 </div>
               </div>
 
               <div class="w-screen flex relative m-auto justify-end space-x-28 flex-row right-20 end-0">
-                <div class="w-[102px] h-[216px] left-0 top-0 relative">
-                  <div class="left-0 top-0 absolute text-white text-[26px] font-bold font-Playfair">About</div>
-                  <div class="left-0 top-[40px] absolute text-white text-lg font-normal font-Playfair leading-[42px]">Menu<br/>Social Media<br/>About Us</div>
+                <div class="w-[102px] h-[216px] left-0 top-0 gap-10 relative flex-col">
+                  <div class="left-0 top-0 relative text-orange-400 text-[26px] font-bold font-Playfair">About</div>
+                  <a href="/static/menu"><div class="hover:underline left-0 relative text-orange-400 text-lg font-normal font-Playfair">Menu</div></a>
+                  <a href="/static/about.html"><div class="hover:underline left-0 relative text-orange-400 text-lg font-normal font-Playfair">About Us</div></a>
                 </div>
-                <div class="w-[134px] h-[174px] left-0 top-0 relative">
-                  <div class="left-0 top-0 absolute text-white text-[26px] font-bold font-Playfair">Company</div>
-                  <div class="left-0 top-[40px] absolute text-white text-lg font-normal font-Playfair leading-[42px]">Terms of service<br/>FAQ</div>
+                <div class="w-[102px] h-[216px] left-0 top-0 relative flex-col">
+                  <div class="left-0 top-0 relative text-orange-400 text-[26px] font-bold font-Playfair">Company</div>
+                  <a href="/static/FAQ.html"><div class="hover:underline left-0 top-0 relative text-orange-400 text-lg font-normal font-Playfair">FAQ</div></a>
+                  <a href="/static/Privacy.html"><div class="hover:underline left-0 top-0 relative text-orange-400 text-lg whitespace-nowrap font-normal font-Playfair">Privacy Policy</div></a>
+                  <a href="/static/TOS.html"><div class="hover:underline left-0 top-0 relative text-orange-400 text-lg whitespace-nowrap font-normal font-Playfair">Term Of Services</div></a>
                 </div>
                 <div class="w-[332px] h-[258px] left-0 top-0 relative">
                   <div class="left-0 top-0 absolute text-white text-[26px] font-bold font-Playfair">Contact Us</div>
@@ -296,5 +303,18 @@
           </div>
         
       </div>
+
+      <script defer>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if(urlParams.size > 0){
+          iziToast.show({
+                        title: 'Success',
+                        message: 'Email success on subscribing',
+                        position: 'topRight',
+                        color: 'green'
+                });
+        }
+      </script>
     </body>
 </html>
